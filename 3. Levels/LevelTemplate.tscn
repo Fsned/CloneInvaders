@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://4. Scenes/Background.tscn" type="PackedScene" id=1]
+[ext_resource path="res://4. Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://3. Levels/Level.gd" type="Script" id=3]
+[ext_resource path="res://4. Scenes/AsteroidSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://4. Scenes/Menus/pauseMenu.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 303.365 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 515.114, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 313.74 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 515.115, 10 )
+
+[node name="LevelTemplate" type="Node2D" groups=[
+"levelManager",
+]]
+script = ExtResource( 3 )
+
+[node name="Background" parent="." instance=ExtResource( 1 )]
+layer = -1
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 498, 569 )
+z_index = 6
+z_as_relative = false
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource( 4 )]
+
+[node name="worldBorders" type="Node" parent="."]
+
+[node name="LeftBorder" type="StaticBody2D" parent="worldBorders"]
+visible = false
+position = Vector2( 0, 302.381 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/LeftBorder"]
+shape = SubResource( 1 )
+
+[node name="TopBorder" type="StaticBody2D" parent="worldBorders"]
+visible = false
+position = Vector2( 511.528, 0 )
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/TopBorder"]
+position = Vector2( -2.82831, -3.05176e-05 )
+shape = SubResource( 2 )
+
+[node name="RightBorder" type="StaticBody2D" parent="worldBorders"]
+visible = false
+position = Vector2( 1021.8, 301.121 )
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/RightBorder"]
+shape = SubResource( 3 )
+
+[node name="BottomBorder" type="StaticBody2D" parent="worldBorders"]
+visible = false
+position = Vector2( 511.528, 599.722 )
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/BottomBorder"]
+rotation = -3.14159
+shape = SubResource( 4 )
+
+[node name="pauseMenu" parent="." instance=ExtResource( 5 )]

@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://3. Levels/LevelTemplate.tscn" type="PackedScene" id=1]
+[ext_resource path="res://4. Scenes/Enemies/Skullship.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "move"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 709.02, 116.981 ), Vector2( 709.02, 515.531 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "move"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 810.905, 301.273 ), Vector2( 810.905, 511.036 ), Vector2( 810.905, 113.485 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "move"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 921.779, 512.534 ), Vector2( 921.779, 116.981 ) ]
+}
+
+[node name="Level1" instance=ExtResource( 1 )]
+
+[node name="Skullship" parent="Enemies" index="0" instance=ExtResource( 2 )]
+position = Vector2( 709.02, 116.981 )
+rotation = 3.14159
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Enemies/Skullship" index="7"]
+autoplay = "move"
+anims/move = SubResource( 1 )
+
+[node name="Skullship2" parent="Enemies" index="1" instance=ExtResource( 2 )]
+position = Vector2( 810.905, 301.273 )
+rotation = 3.14159
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Enemies/Skullship2" index="7"]
+autoplay = "move"
+anims/move = SubResource( 2 )
+
+[node name="Skullship3" parent="Enemies" index="2" instance=ExtResource( 2 )]
+position = Vector2( 921.779, 116.981 )
+rotation = 3.14159
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Enemies/Skullship3" index="7"]
+autoplay = "move"
+anims/move = SubResource( 3 )

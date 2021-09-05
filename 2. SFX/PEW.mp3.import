@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PEW.mp3-3b82e7be4053b2f9739a71f07c8b69d4.mp3str"
+
+[deps]
+
+source_file="res://2. SFX/PEW.mp3"
+dest_files=[ "res://.import/PEW.mp3-3b82e7be4053b2f9739a71f07c8b69d4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
