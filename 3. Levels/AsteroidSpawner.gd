@@ -39,4 +39,4 @@ func spawnAsteroid():
 	obstacleEntity.set_as_toplevel(true)
 	obstacleEntity.global_transform = $spawnPoint.global_transform
 	obstacleEntity.position.x = randi() % 1012
-	obstacleEntity.linear_velocity = Vector2(0, 1) * ((randi() % 110 + 90)/100 * asteroidSpeed)
+	obstacleEntity.linear_velocity = Vector2(0, 1) * ((randi() % 110 + 90)/100.0 * asteroidSpeed)
