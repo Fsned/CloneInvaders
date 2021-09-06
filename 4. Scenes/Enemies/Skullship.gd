@@ -8,13 +8,15 @@ func _process(_delta):
 	
 	
 func hurt():
-	health -= 2
-	if health > 0:
-		$AnimationPlayer.play("hurt")
-	else:
-		if health == 0:
-			$AnimationPlayer.play("die")
-			get_tree().call_group("levelManager", "mobDied")
+	if $hurtTimer.is_stopped():
+		health -= 2
+		if health > 0:
+			$AnimationPlayer.play("hurt")
+			$hurtTimer.start()
+		else:
+			if health == 0:
+				$AnimationPlayer.play("die")
+				get_tree().call_group("levelManager", "mobDied")
 		
 		
 	
