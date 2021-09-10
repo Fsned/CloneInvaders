@@ -2,8 +2,11 @@ extends "res://4. Scenes/CharacterTemplate.gd"
 
 var properties = PlayerProperties.new()
 
+
 func _ready():
 	get_tree().call_group("GUI", "updatePlayerValues", properties)
+	properties.currentHealth = 29000
+	
 
 func _process(_delta):
 	followMouse()

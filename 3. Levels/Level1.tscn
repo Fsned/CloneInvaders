@@ -7,6 +7,7 @@
 
 [node name="Player" parent="." index="1"]
 position = Vector2( 84.4673, 302.301 )
+SPEED = 500
 
 [node name="Skullship" parent="Enemies" index="0" instance=ExtResource( 2 )]
 position = Vector2( 837.553, 172.305 )
@@ -19,3 +20,6 @@ rotation = -3.14159
 [node name="Skullship3" parent="Enemies" index="2" instance=ExtResource( 2 )]
 position = Vector2( 837.553, 436.007 )
 rotation = -3.14159
+
+[node name="Spawner" parent="." index="6"]
+objectPath = "res://4. Scenes/Obstacles/Asteroid.tscn"

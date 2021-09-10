@@ -1,9 +1,11 @@
 extends Node
 
-export var spawnAsteroids = true
-export var asteroidSpawnChance = 10 
-const asteroidPath = "res://4. Scenes/Obstacles/Asteroid.tscn"
-const asteroidSpeed = 500
+export var spawn = true
+export var asteroidSpawnChance = 80
+export var objectPath = ""
+
+const asteroidSpeed = 350
+
 
 func _ready():
 	pass
@@ -12,7 +14,7 @@ func _ready():
 	
 func _process(_delta):
 	
-	if spawnAsteroids:
+	if spawn and objectPath != "":
 		asteroidSpawner()
 		
 			
@@ -34,7 +36,7 @@ func asteroidSpawner():
 			
 			
 func spawnAsteroid():
-	var obstacleEntity = load(asteroidPath).instance()
+	var obstacleEntity = load(objectPath).instance()
 	add_child(obstacleEntity)
 	obstacleEntity.set_as_toplevel(true)
 	obstacleEntity.global_transform = $spawnPoint.global_transform
