@@ -1,21 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://4. Scenes/Projectiles/LaserBullet.gd" type="Script" id=1]
 [ext_resource path="res://2. SFX/PEW.wav" type="AudioStream" id=2]
+[ext_resource path="res://1. GFX/Kenney/PNG/Default/effect_yellow.png" type="Texture" id=3]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.462963, 0.962963 )
-colors = PoolColorArray( 0.0530434, 0.905273, 0.311043, 1, 1, 1, 1, 1, 0, 1, 0.255859, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-width = 4
-
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 3.30575
 height = 25.7623
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape2D:scale")
 tracks/0/interp = 1
@@ -52,20 +45,21 @@ can_sleep = false
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 8, 7 )
-texture = SubResource( 2 )
+rotation = 1.57079
+scale = Vector2( 0.376453, 0.48223 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 rotation = -1.56796
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="despawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/Expand beam" = SubResource( 4 )
+"anims/Expand beam" = SubResource( 2 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )

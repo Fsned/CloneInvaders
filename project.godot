@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "PlayerProperties",
+"language": "GDScript",
+"path": "res://Utility/PlayerProperties.gd"
+} ]
+_global_script_class_icons={
+"PlayerProperties": "res://1. GFX/Spaceships/Player.png"
+}
+
 [application]
 
 config/name="CloneInvaders"

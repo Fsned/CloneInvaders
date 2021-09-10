@@ -9,15 +9,12 @@ enum weapon {
 }
 
 
-
-
-
-
-
 var motion = Vector2.ZERO
 export var SPEED = 200
 var projectileSpeed = 1000
 var currentProjectile = "res://4. Scenes/Projectiles/LaserBullet.tscn"
+var alive = true
+var health = 50
 	
 func followMouse():
 	look_at(get_global_mouse_position())
@@ -52,3 +49,12 @@ func fire():
 		projectile.linear_velocity = characterForward * projectileSpeed
 		$shotCooldown.start()
 	
+	
+func is_alive():
+	return alive
+	
+func damage(amount):
+	if is_alive():
+		health -= amount
+		if health <= 0:
+			alive = false

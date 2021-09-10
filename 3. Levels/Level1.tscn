@@ -5,14 +5,17 @@
 
 [node name="Level1" instance=ExtResource( 1 )]
 
+[node name="Player" parent="." index="1"]
+position = Vector2( 84.4673, 302.301 )
+
 [node name="Skullship" parent="Enemies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 709.02, 116.981 )
-rotation = 3.14159
+position = Vector2( 837.553, 172.305 )
+rotation = -3.14159
 
 [node name="Skullship2" parent="Enemies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 810.905, 301.273 )
-rotation = 3.14159
+position = Vector2( 837.553, 296.665 )
+rotation = -3.14159
 
 [node name="Skullship3" parent="Enemies" index="2" instance=ExtResource( 2 )]
-position = Vector2( 921.779, 116.981 )
-rotation = 3.14159
+position = Vector2( 837.553, 436.007 )
+rotation = -3.14159

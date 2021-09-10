@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://4. Scenes/Enemies/Skullship.gd" type="Script" id=2]
 [ext_resource path="res://1. GFX/Spaceships/Enemy1.png" type="Texture" id=3]
@@ -22,42 +22,42 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -5 ), Vector2( 0, 5 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:self_modulate")
+tracks/1/path = NodePath("Sprite:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 0,
-"values": [  ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ -90.0, -85.0, -95.0, -90.0 ]
 }
-tracks/3/type = "method"
-tracks/3/path = NodePath("..")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "queue_free"
 } ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1.03526, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.32549, 0.0392157, 0.0392157, 0.486275 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -104,11 +104,28 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 100 ), Vector2( 0, -100 ) ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "move_2"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 2.6, 3.2, 3.9, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 480, 0 ), Vector2( 571.896, -136.346 ), Vector2( 646.312, -202.271 ), Vector2( 745.2, -115.37 ), Vector2( 805.133, -5.99326 ) ]
+}
+
 [node name="Skullship" type="Node2D" groups=[
 "enemies",
 ]]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 217.686, 0 )
 collision_layer = 2
 collision_mask = 13
 script = ExtResource( 2 )
@@ -122,7 +139,7 @@ shape = SubResource( 1 )
 one_shot = true
 
 [node name="hurtTimer" type="Timer" parent="KinematicBody2D"]
-wait_time = 0.5
+wait_time = 0.1
 one_shot = true
 
 [node name="Forward" type="Position2D" parent="KinematicBody2D"]
@@ -142,6 +159,7 @@ anims/hurt = SubResource( 3 )
 [node name="movePlayer" type="AnimationPlayer" parent="KinematicBody2D"]
 autoplay = "move1"
 anims/move1 = SubResource( 4 )
+anims/move_2 = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 rotation = -1.5708

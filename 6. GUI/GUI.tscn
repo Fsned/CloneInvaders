@@ -1,3 +1,105 @@
-[gd_scene format=2]
+[gd_scene load_steps=9 format=2]
 
-[node name="GUI" type="CanvasLayer"]
+[ext_resource path="res://6. GUI/GUI.gd" type="Script" id=1]
+[ext_resource path="res://6. GUI/HealthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://6. GUI/PowerBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://1. GFX/Obstacles/SmallAsteroid.png" type="Texture" id=4]
+[ext_resource path="res://1. GFX/Fonts/Kenney Future.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 5 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 5 )
+
+[node name="GUI" type="CanvasLayer" groups=[
+"GUI",
+]]
+script = ExtResource( 1 )
+
+[node name="Container" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftSideContainer" type="VBoxContainer" parent="Container"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -90.0
+margin_right = 254.0
+grow_vertical = 0
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" parent="Container/LeftSideContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 254.0
+
+[node name="PowerBar" parent="Container/LeftSideContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 32.0
+margin_right = 254.0
+margin_bottom = 32.0
+
+[node name="RightSideContainer" type="VBoxContainer" parent="Container"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -112.0
+margin_top = -86.0
+grow_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/RightSideContainer"]
+margin_right = 112.0
+margin_bottom = 64.0
+alignment = 2
+
+[node name="MeteoriteCounter" type="Label" parent="Container/RightSideContainer/HBoxContainer"]
+margin_top = 18.0
+margin_right = 20.0
+margin_bottom = 45.0
+text = "0"
+
+[node name="xLabel" type="Label" parent="Container/RightSideContainer/HBoxContainer"]
+margin_left = 24.0
+margin_top = 18.0
+margin_right = 44.0
+margin_bottom = 45.0
+text = "x"
+
+[node name="TextureRect" type="TextureRect" parent="Container/RightSideContainer/HBoxContainer"]
+margin_left = 48.0
+margin_top = 16.0
+margin_right = 112.0
+margin_bottom = 80.0
+rect_pivot_offset = Vector2( 32, 32 )
+texture = ExtResource( 4 )
+stretch_mode = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Container/RightSideContainer"]
+margin_top = 68.0
+margin_right = 112.0
+margin_bottom = 86.0
+alignment = 2
+
+[node name="LevelLabel" type="Label" parent="Container/RightSideContainer/HBoxContainer2"]
+margin_left = 30.0
+margin_right = 112.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 3 )
+text = "Level 0"
