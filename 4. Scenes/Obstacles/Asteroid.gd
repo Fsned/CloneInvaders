@@ -2,15 +2,15 @@ extends RigidBody2D
 
 var rotationScale = 0.0
 
-const asteroidFragmentPath = "res://4. Scenes/Obstacles/asteroidFragment.tscn"
+const asteroidFragment = preload("res://4. Scenes/Obstacles/asteroidFragment.tscn")
 
 export var damage = 50
 export var shatterChance = 100
-export var fragmentSpeed = 150
+export var fragmentSpeed = 350
 
 func ready():
 	randomize()
-	angular_velocity = randi() % 4 + 2
+	
 	
 	
 func _on_despawnTimer_timeout():
@@ -39,21 +39,20 @@ func _on_Asteroid_body_entered(body):
 				
 				
 func explode():
-	
 #	Spawn 3-5 fragments
 	randomize()
-	var noOfFragments = randi() % 5 +1
+	var noOfFragments = randi() % 5 + 2
 	
-	print ("Shattering into: " + str(noOfFragments) + " fragments!!")
+	$AnimationPlayer.play("explode")
 	
-	for a in range(noOfFragments):
-		var shatterFragmentObject = load(asteroidFragmentPath).instance()
-		add_child(shatterFragmentObject)
-		shatterFragmentObject.set_as_toplevel(true)
+	for _a in range(noOfFragments):
+		var shatterFragmentObject = asteroidFragment.instance()
+		get_parent().add_child(shatterFragmentObject)
 		shatterFragmentObject.global_transform = global_transform
-		shatterFragmentObject.linear_velocity = Vector2.LEFT.rotated(randi() % 2*PI) * ((randi() % 110 + 90)/100.0 * fragmentSpeed)
-		
+		shatterFragmentObject.linear_velocity = Vector2.LEFT.rotated(rad2deg(randi() % 6)) * fragmentSpeed
 	
-	
-			
-		
+	collision_layer = 0
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()

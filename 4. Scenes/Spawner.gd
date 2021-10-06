@@ -4,7 +4,7 @@ export var spawn = true
 export var asteroidSpawnChance = 80
 export var objectPath = ""
 
-const asteroidSpeed = 350
+const asteroidSpeed = 200
 
 
 func _ready():
@@ -40,5 +40,6 @@ func spawnAsteroid():
 	add_child(obstacleEntity)
 	obstacleEntity.set_as_toplevel(true)
 	obstacleEntity.global_transform = $spawnPoint.global_transform
-	obstacleEntity.position.x = randi() % 1012
-	obstacleEntity.linear_velocity = Vector2(0, 1) * ((randi() % 110 + 90)/100.0 * asteroidSpeed)
+	obstacleEntity.position.y = randi() % 600
+	obstacleEntity.linear_velocity = Vector2(-1, 0) * ((randi() % 110 + 90)/100.0 * asteroidSpeed)
+	obstacleEntity.angular_velocity = randi() % 20 - 10 + 2

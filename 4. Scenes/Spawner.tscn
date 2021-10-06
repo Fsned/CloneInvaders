@@ -10,4 +10,4 @@ wait_time = 0.5
 one_shot = true
 
 [node name="spawnPoint" type="Position2D" parent="."]
-position = Vector2( 0, -53.9391 )
+position = Vector2( 1078.78, 289.173 )

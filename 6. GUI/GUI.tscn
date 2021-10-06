@@ -53,7 +53,7 @@ margin_right = 254.0
 margin_bottom = 32.0
 
 [node name="RightSideContainer" type="VBoxContainer" parent="Container"]
-anchor_left = 1.0
+anchor_left = 0.35
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,41 +65,58 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/RightSideContainer"]
-margin_right = 112.0
+margin_right = 777.0
 margin_bottom = 64.0
 alignment = 2
 
 [node name="MeteoriteCounter" type="Label" parent="Container/RightSideContainer/HBoxContainer"]
+margin_left = 665.0
 margin_top = 18.0
-margin_right = 20.0
+margin_right = 685.0
 margin_bottom = 45.0
 text = "0"
 
 [node name="xLabel" type="Label" parent="Container/RightSideContainer/HBoxContainer"]
-margin_left = 24.0
+margin_left = 689.0
 margin_top = 18.0
-margin_right = 44.0
+margin_right = 709.0
 margin_bottom = 45.0
 text = "x"
 
 [node name="TextureRect" type="TextureRect" parent="Container/RightSideContainer/HBoxContainer"]
-margin_left = 48.0
-margin_top = 16.0
-margin_right = 112.0
-margin_bottom = 80.0
+margin_left = 713.0
+margin_right = 777.0
+margin_bottom = 64.0
 rect_pivot_offset = Vector2( 32, 32 )
 texture = ExtResource( 4 )
 stretch_mode = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Container/RightSideContainer"]
 margin_top = 68.0
-margin_right = 112.0
+margin_right = 777.0
 margin_bottom = 86.0
 alignment = 2
 
 [node name="LevelLabel" type="Label" parent="Container/RightSideContainer/HBoxContainer2"]
-margin_left = 30.0
-margin_right = 112.0
+margin_left = 695.0
+margin_right = 777.0
 margin_bottom = 18.0
 custom_fonts/font = SubResource( 3 )
 text = "Level 0"
+
+[node name="CenterContainer" type="CenterContainer" parent="Container"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 40.0
+grow_horizontal = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enemiesLeftLabel" type="Label" parent="Container/CenterContainer"]
+margin_top = 6.0
+margin_right = 316.0
+margin_bottom = 33.0
+text = "Enemies remaining: "

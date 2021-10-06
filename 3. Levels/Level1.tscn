@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://3. Levels/LevelTemplate.tscn" type="PackedScene" id=1]
-[ext_resource path="res://4. Scenes/Enemies/Skullship.tscn" type="PackedScene" id=2]
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -9,17 +8,22 @@
 position = Vector2( 84.4673, 302.301 )
 SPEED = 500
 
-[node name="Skullship" parent="Enemies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 837.553, 172.305 )
-rotation = -3.14159
-
-[node name="Skullship2" parent="Enemies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 837.553, 296.665 )
-rotation = -3.14159
-
-[node name="Skullship3" parent="Enemies" index="2" instance=ExtResource( 2 )]
-position = Vector2( 837.553, 436.007 )
-rotation = -3.14159
+[node name="GUI" parent="." index="5"]
+level = "0"
 
 [node name="Spawner" parent="." index="6"]
 objectPath = "res://4. Scenes/Obstacles/Asteroid.tscn"
+
+[node name="winTimer" type="Timer" parent="Timers" index="0"]
+one_shot = true
+
+[node name="loseTimer" type="Timer" parent="Timers" index="1"]
+one_shot = true
+
+[node name="mobSpawner" parent="." index="8"]
+levelKillGoal = 5
+
+[connection signal="died" from="Player" to="." method="_on_Player_died"]
+[connection signal="healthChanged" from="Player" to="GUI" method="_on_Player_healthChanged"]
+[connection signal="timeout" from="Timers/winTimer" to="." method="_on_winTimer_timeout"]
+[connection signal="timeout" from="Timers/loseTimer" to="." method="_on_loseTimer_timeout"]

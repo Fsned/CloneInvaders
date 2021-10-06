@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://4. Scenes/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://4. Scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://4. Scenes/Spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://4. Scenes/Menus/pauseMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://6. GUI/GUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://4. Scenes/mobSpawner.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 303.365 )
@@ -47,7 +48,7 @@ shape = SubResource( 1 )
 [node name="TopBorder" type="StaticBody2D" parent="worldBorders"]
 visible = false
 position = Vector2( 511.528, 0 )
-collision_layer = 4
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/TopBorder"]
 position = Vector2( -2.82831, -3.05176e-05 )
@@ -56,7 +57,7 @@ shape = SubResource( 2 )
 [node name="RightBorder" type="StaticBody2D" parent="worldBorders"]
 visible = false
 position = Vector2( 1021.8, 301.121 )
-collision_layer = 4
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/RightBorder"]
 shape = SubResource( 3 )
@@ -64,7 +65,7 @@ shape = SubResource( 3 )
 [node name="BottomBorder" type="StaticBody2D" parent="worldBorders"]
 visible = false
 position = Vector2( 511.528, 599.722 )
-collision_layer = 4
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/BottomBorder"]
 rotation = -3.14159
@@ -75,3 +76,8 @@ shape = SubResource( 4 )
 [node name="GUI" parent="." instance=ExtResource( 6 )]
 
 [node name="Spawner" parent="." instance=ExtResource( 4 )]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="mobSpawner" parent="." instance=ExtResource( 7 )]
+levelKillGoal = 10

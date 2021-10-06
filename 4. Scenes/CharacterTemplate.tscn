@@ -4,8 +4,8 @@
 [ext_resource path="res://4. Scenes/CharacterTemplate.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 12.7139
-height = 23.3414
+radius = 12.2936
+height = 4.75617
 
 [node name="CharacterTemplate" type="KinematicBody2D"]
 collision_layer = 15
@@ -28,10 +28,14 @@ one_shot = true
 one_shot = true
 
 [node name="Forward" type="Position2D" parent="."]
-position = Vector2( 37.583, 0 )
+visible = false
+position = Vector2( 45, 0 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 visible = false
 cast_to = Vector2( 0, 600 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://4. Scenes/Dialog/Dialog.gd" type="Script" id=2]
+
+[node name="Dialog" type="Node"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="InitiationTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="InitiationTimer" to="." method="_on_InitiationTimer_timeout"]

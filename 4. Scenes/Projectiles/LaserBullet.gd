@@ -18,7 +18,21 @@ func _on_despawnTimer_timeout():
 
 
 func _on_LaserBullet_body_entered(body):
-	if (body.collision_layer == 2 || body.collision_layer == 1):
-		if (body.has_method("hurt")):
-			body.hurt(damage)
+	if (body.has_method("hurt")):
+		body.hurt(damage)
+	
+	$Particles2D.set_as_toplevel(true)
+	$Particles2D.global_position = global_position
+	$Particles2D.emitting = true
+			
+	$Sprite.visible = false
+	collision_layer = 0
+
+
+func set_projectile_modulation(color):
+	$Sprite.self_modulate = color
+	$Particles2D.process_material.color = color
+
+
+func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
