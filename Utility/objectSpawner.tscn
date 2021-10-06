@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Utility/objectSpawner.gd" type="Script" id=1]
 
-[node name="objectSpawner" type="RigidBody2D"]
+[node name="objectSpawner" type="Node"]
 script = ExtResource( 1 )
 
 [node name="spawnTimer" type="Timer" parent="."]

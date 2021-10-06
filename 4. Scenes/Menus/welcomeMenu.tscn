@@ -43,6 +43,7 @@ script = ExtResource( 4 )
 layer = -1
 
 [node name="AsteroidSpawner" parent="Background" instance=ExtResource( 1 )]
+spawn = false
 
 [node name="CenterContainer" type="CenterContainer" parent="Background"]
 anchor_right = 1.0
@@ -129,10 +130,14 @@ playback_default_blend_time = 1.0
 anims/zoomzoom = SubResource( 4 )
 
 [node name="objectSpawner" parent="." instance=ExtResource( 6 )]
-objectPath = "res://4. Scenes/Obstacles/asteroidFragment.tscn"
-spawnTimerWaitTime = 1
-spawnPosition = Vector2( 200, 200 )
-linearDirection = Vector2( 1, 0 )
+spawnTimerWaitTime = 2
+spawnChance = 50
+spawnPosition = Vector2( 1050, 300 )
+ySpread = 300
+linearDirection = Vector2( -1, 0 )
+linearSpeed = 100
+angularSpeed = 3
+badLuckProtection = 10
 
 [connection signal="pressed" from="Background/CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="Background/CenterContainer/VBoxContainer/PlayTutorialButton" to="." method="_on_PlayTutorialButton_pressed"]

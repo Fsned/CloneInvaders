@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Node
 
 export var spawn = true
 export var objectPath = "res://4. Scenes/Obstacles/Asteroid.tscn"
@@ -25,7 +25,9 @@ export (int, 0.0, 100.0) var badLuckProtection = 0.00
 func _ready():
 	object = load(objectPath)
 	
-	$spawnTimer.start()
+	if spawn:
+		$spawnTimer.wait_time = spawnTimerWaitTime 
+		$spawnTimer.start()
 
 func _on_spawnTimer_timeout():
 	randomize()
@@ -37,13 +39,14 @@ func _on_spawnTimer_timeout():
 		spawnChance = originalSpawnChance
 	
 	else:
+		print ("Didn't spawn for once")
 		spawnChance += badLuckProtection
 	
 	
 	
 func spawnThing():
 	
-	var spawnObject = load("res://4. Scenes/Obstacles/asteroidFragment.tscn").instance()
+	var spawnObject = load(objectPath).instance()
 	var randomSpreadX = 0
 	var randomSpreadY = 0
 	
