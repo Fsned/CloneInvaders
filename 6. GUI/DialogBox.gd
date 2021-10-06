@@ -6,7 +6,6 @@ export var displaySpaceTip = true
 
 var series = ""
 
-signal seriesDialogClosed
 
 func _ready():
 	$CenterContainer/Label/NinePatchRect/SpaceTipLabel.visible = displaySpaceTip
@@ -32,5 +31,7 @@ func _process(_delta):
 func setSeries(seriesId):
 	series = seriesId
 
+func getSeries():
+	return series
 func closeAllDialogs():
 	hide()

@@ -20,7 +20,7 @@ export (int, "Basic", "Double", "Triple", "Cone") var currentWeapon = weapon.bas
 
 export var SPEED = 10000
 export var invincible = true
-export (int, 0.1, 5) var shotCooldown = 0.25
+export (float, 0.1, 5) var shotCooldown = 0.25
 var motion = Vector2.ZERO
 var projectileSpeed = 20
 var currentProjectile = preload("res://4. Scenes/Projectiles/LaserBullet.tscn")	
@@ -69,7 +69,7 @@ func switchWeapon(newWeapon, forcedUpdate = false):
 		
 		match currentWeapon:
 			weapon.basic:
-				$showCooldown.wait_time = weaponCooldowns["basic"]
+				$shotCooldown.wait_time = weaponCooldowns["basic"]
 #				$shotCooldown.wait_time = 0.25 + (unitType*1)
 			weapon.double:
 				$shotCooldown.wait_time = 0.25 + (unitType*1)
@@ -81,7 +81,7 @@ func switchWeapon(newWeapon, forcedUpdate = false):
 		emit_signal("weaponChanged")
 
 
-func fire(colour = "e3e01a"):
+func fire(_colour = "e3e01a"):
 	
 	match currentWeapon:
 		weapon.basic:
@@ -134,7 +134,7 @@ func hurt(amount):
 	
 
 
-func spawnProjectile(speed, rotation = 0, scenePath = "res://4. Scenes/Projectiles/LaserBullet.tscn", color = "e3e01a"):
+func spawnProjectile(speed, rotation = 0, _scenePath = "res://4. Scenes/Projectiles/LaserBullet.tscn", color = "e3e01a"):
 	var projectile = currentProjectile.instance()
 	projectile.set_as_toplevel(true)
 	projectile.global_transform = $Forward.global_transform

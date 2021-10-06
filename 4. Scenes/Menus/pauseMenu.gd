@@ -39,5 +39,5 @@ func _on_SureNo_pressed():
 
 func _on_MenuButton_pressed():
 	togglePauseMenu()
-	get_tree().change_scene("res://4. Scenes/Menus/welcomeMenu.tscn")
+	var _a = get_tree().change_scene("res://4. Scenes/Menus/welcomeMenu.tscn")
 	get_tree().call_group("dialogs", "closeAllDialogs")

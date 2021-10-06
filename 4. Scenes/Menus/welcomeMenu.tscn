@@ -1,6 +1,5 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://4. Scenes/Spawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://4. Scenes/Background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://1. GFX/Fonts/Kenney Future.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://4. Scenes/Menus/welcomeMenu.gd" type="Script" id=4]
@@ -41,9 +40,6 @@ script = ExtResource( 4 )
 
 [node name="Background" parent="." instance=ExtResource( 2 )]
 layer = -1
-
-[node name="AsteroidSpawner" parent="Background" instance=ExtResource( 1 )]
-spawn = false
 
 [node name="CenterContainer" type="CenterContainer" parent="Background"]
 anchor_right = 1.0
@@ -130,10 +126,10 @@ playback_default_blend_time = 1.0
 anims/zoomzoom = SubResource( 4 )
 
 [node name="objectSpawner" parent="." instance=ExtResource( 6 )]
-spawnTimerWaitTime = 2
-spawnChance = 50
+spawnTimerWaitTime = 4
+spawnChance = 30
 spawnPosition = Vector2( 1050, 300 )
-ySpread = 300
+ySpread = 250
 linearDirection = Vector2( -1, 0 )
 linearSpeed = 100
 angularSpeed = 3

@@ -51,7 +51,7 @@ func _physics_process(delta):
 
 func handleMoveForward(delta):
 	motion = ((global_position + Vector2(-1, 0)) - global_position).normalized() * moveForwardSpeed * delta
-	move_and_slide(motion, Vector2(0, -1))		
+	var _a = move_and_slide(motion, Vector2(0, -1))		
 
 func navigate(delta):
 	if (navigationPaused): return
@@ -69,7 +69,7 @@ func navigate(delta):
 	
 func move(delta):
 	motion = (possibleDestinations[0].position - position).normalized() * moveForwardSpeed * delta
-	move_and_slide(motion, Vector2(0, -1))
+	var _a = move_and_slide(motion, Vector2(0, -1))
 	
 	
 func updatePath():

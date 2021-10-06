@@ -16,7 +16,6 @@ __meta__ = {
 }
 
 [node name="starParticles" type="CPUParticles2D" parent="."]
-visible = false
 position = Vector2( 1064.31, 288.813 )
 rotation = 1.41454
 amount = 25
@@ -31,7 +30,6 @@ hue_variation = 0.09
 hue_variation_random = 0.5
 
 [node name="planetParticles" type="CPUParticles2D" parent="."]
-visible = false
 position = Vector2( 1154.83, 87.5905 )
 rotation = 1.57079
 emitting = false

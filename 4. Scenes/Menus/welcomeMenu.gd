@@ -23,4 +23,4 @@ func _on_LoadGameButton_pressed():
 
 func _on_PlayTutorialButton_pressed():
 	print ("Play tutorial")
-	get_tree().change_scene("res://3. Levels/LevelTutorial.tscn")
+	var _a = get_tree().change_scene("res://3. Levels/LevelTutorial.tscn")

@@ -11,7 +11,7 @@ func _process(_delta):
 	handlePlayerMovement()
 	
 	
-func _input(event):
+func _input(_event):
 	if Input.is_action_pressed("scrollUp"):
 		currentWeapon = clamp(currentWeapon + 1, weapon.basic, weapon.cone)
 		switchWeapon(currentWeapon)		
