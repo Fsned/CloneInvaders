@@ -47,9 +47,9 @@ func explode():
 	
 	for _a in range(noOfFragments):
 		var shatterFragmentObject = asteroidFragment.instance()
-		get_parent().add_child(shatterFragmentObject)
 		shatterFragmentObject.global_transform = global_transform
 		shatterFragmentObject.linear_velocity = Vector2.LEFT.rotated(rad2deg(randi() % 6)) * fragmentSpeed
+		get_parent().add_child(shatterFragmentObject)
 	
 	collision_layer = 0
 

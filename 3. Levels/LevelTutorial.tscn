@@ -10,7 +10,7 @@ script = ExtResource( 2 )
 position = Vector2( 141.403, 314.288 )
 SPEED = 500
 
-[node name="GUI" parent="." index="5"]
+[node name="GUI" parent="." index="4"]
 level = "Tutorial"
 
 [node name="dialogTimer" type="Timer" parent="Timers" index="0"]
@@ -18,7 +18,7 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="mobSpawner" parent="." index="8"]
+[node name="mobSpawner" parent="." index="6"]
 levelKillGoal = 0
 isActive = false
 

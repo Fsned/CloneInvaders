@@ -2,7 +2,8 @@ extends Node
 
 export var spawn = true
 export var asteroidSpawnChance = 80
-export var objectPath = ""
+#export var objectPath = ""
+export (String, MULTILINE) var objectPath = ""
 
 const asteroidSpeed = 200
 

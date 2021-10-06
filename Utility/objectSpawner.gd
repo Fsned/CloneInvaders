@@ -1,7 +1,7 @@
 extends Node
 
 export var spawn = true
-export var objectPath = "res://4. Scenes/Obstacles/Asteroid.tscn"
+export (String, MULTILINE) var objectPath
 
 export (int, 0.1, 100.0) var spawnTimerWaitTime = 3.0
 export (int, 0, 100) var spawnChance = 100
@@ -23,8 +23,6 @@ var object
 export (int, 0.0, 100.0) var badLuckProtection = 0.00
 
 func _ready():
-	object = load(objectPath)
-	
 	if spawn:
 		$spawnTimer.wait_time = spawnTimerWaitTime 
 		$spawnTimer.start()
@@ -39,13 +37,11 @@ func _on_spawnTimer_timeout():
 		spawnChance = originalSpawnChance
 	
 	else:
-		print ("Didn't spawn for once")
 		spawnChance += badLuckProtection
 	
 	
 	
 func spawnThing():
-	
 	var spawnObject = load(objectPath).instance()
 	var randomSpreadX = 0
 	var randomSpreadY = 0
@@ -53,16 +49,12 @@ func spawnThing():
 	if xSpread > 0:	randomSpreadX = (randi() % (xSpread*2)) - xSpread
 	if ySpread > 0: randomSpreadY = (randi() % (ySpread*2)) - ySpread
 	 
-	spawnObject.global_position.x = spawnPosition.x + randomSpreadX
-	spawnObject.global_position.y = spawnPosition.y + randomSpreadY
+	spawnObject.position.x = spawnPosition.x + randomSpreadX
+	spawnObject.position.y = spawnPosition.y + randomSpreadY
 	
 	spawnObject.linear_velocity = linearDirection * linearSpeed
 	
 	spawnObject.linear_velocity = spawnObject.linear_velocity.rotated((linearRotation/180) * PI)
 	spawnObject.angular_velocity = angularSpeed
-	
-	print ("Spawning object at:")
-	print ("x: " + str(spawnObject.position.x))
-	print ("y: " + str(spawnObject.position.y))
 	
 	add_child(spawnObject)

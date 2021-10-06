@@ -8,11 +8,8 @@
 position = Vector2( 84.4673, 302.301 )
 SPEED = 500
 
-[node name="GUI" parent="." index="5"]
+[node name="GUI" parent="." index="4"]
 level = "0"
-
-[node name="Spawner" parent="." index="6"]
-objectPath = "res://4. Scenes/Obstacles/Asteroid.tscn"
 
 [node name="winTimer" type="Timer" parent="Timers" index="0"]
 one_shot = true
@@ -20,8 +17,10 @@ one_shot = true
 [node name="loseTimer" type="Timer" parent="Timers" index="1"]
 one_shot = true
 
-[node name="mobSpawner" parent="." index="8"]
-levelKillGoal = 5
+[node name="mobSpawner" parent="." index="6"]
+spawnTripleChance = 4
+spawnQuadChance = 1
+levelKillGoal = 0
 
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
 [connection signal="healthChanged" from="Player" to="GUI" method="_on_Player_healthChanged"]

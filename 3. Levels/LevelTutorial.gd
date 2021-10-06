@@ -4,7 +4,7 @@ extends "res://3. Levels/Level.gd"
 
 
 func _ready():
-	get_tree().call_group("GUI", "toggleEnemiesRemaining")
+#	get_tree().call_group("GUI", "toggleEnemiesRemaining")
 	
 	Dialog.createDialogSeries("tutorialSeries")
 	Dialog.addDialogToSeries("tutorialSeries", "Hello!", true)

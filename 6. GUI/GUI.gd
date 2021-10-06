@@ -40,8 +40,9 @@ func updatePlayerValues(a: PlayerProperties):
 func setLevel(_value):
 	$Container/RightSideContainer/HBoxContainer2/LevelLabel.text = "Level " + str(level)
 	
-func setRemainingEnemies(enemiesRemaining):
-	$Container/CenterContainer/enemiesLeftLabel.text = "Enemies left: " + str(enemiesRemaining)
+func setScore(value):
+	$Container/CenterContainer/scoreLabel.text = "Score: " + str(value)
+
 
 func _on_Player_healthChanged(value):
 	setHealth(value)

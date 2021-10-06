@@ -5,6 +5,7 @@ export var level = "0"
 var enemiesAdded = false
 
 var meteosCollected = 0
+var score = 0
 
 func _ready():
 	get_tree().call_group("GUI", "setLevel", level)		
@@ -29,8 +30,10 @@ func unitDied(unitType):
 			enemyCount -= 1
 			meteosCollected += 5
 			get_tree().call_group("GUI", "setMeteorites", meteosCollected)
-			get_tree().call_group("GUI", "setRemainingEnemies", enemyCount)
-			if enemyCount <= 0:
+			get_tree().call_group("GUI", "setScore", score)
+			score += 1
+			
+			if enemyCount == 0:
 				win()
 		2:	# Boss died
 			get_tree().call_group("GUI", "setRemainingEnemies", enemyCount)
@@ -40,8 +43,12 @@ func unitDied(unitType):
 	
 	
 func setLevelKillGoal(killsToGoal):
-	enemyCount = killsToGoal
-	get_tree().call_group("GUI", "setRemainingEnemies", enemyCount)
+	if killsToGoal == 0:
+		enemyCount = -1
+		get_tree().call_group("GUI", "setRemainingEnemies", enemyCount)
+	else:
+		enemyCount = killsToGoal
+		
 
 func _on_winTimer_timeout():
 	Dialog.openDialogBox("Nice! you won this level...")
@@ -49,10 +56,19 @@ func _on_winTimer_timeout():
 
 
 func _on_loseTimer_timeout():
-	Dialog.openDialogBox("Not nice... you died :(", true)
 	get_tree().paused = true
+	get_tree().call_group("loseMenu", "setScore", score)
+	$loseMenu.show()
 
 
 func _on_Player_died(_unitType):
 	print ("died")
 	$Timers/loseTimer.start()
+
+
+func _on_scoreTimer_timeout():
+	score += 1
+	get_tree().call_group("GUI", "setScore", score)
+	
+func getScore():
+	return score

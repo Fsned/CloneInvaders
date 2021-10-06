@@ -4,7 +4,8 @@ extends Popup
 
 func _input(_event):
 	if Input.is_action_just_pressed("Pause"):
-		togglePauseMenu()
+		if get_tree().get_root().find_node("loseMenu", true, false).visible == false:
+			togglePauseMenu()
 
 
 func togglePauseMenu():

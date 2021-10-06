@@ -24,20 +24,37 @@ func _on_spawnTimer_timeout():
 	if isActive:
 		randomize()
 		var spawnRoll = randi() % 100
+		if levelKillGoal > 0:
+			if spawnRoll <= spawnQuadChance && mobsSpawned + 4 <= levelKillGoal:
+				spawnQuadlet(skullshipScene)
+				mobsSpawned += 4
+				
+			elif spawnRoll <= spawnTripleChance && mobsSpawned + 3 <= levelKillGoal:
+				spawnTriplet(skullshipScene)
+				mobsSpawned += 3
+			elif spawnRoll <= spawnDoubleChance && mobsSpawned + 2 <= levelKillGoal:
+				spawnDoublet(skullshipScene)
+				mobsSpawned += 2
+			elif spawnRoll <= spawnSingleChance && mobsSpawned + 1 <= levelKillGoal:
+				spawnSinglet(skullshipScene)
+				mobsSpawned += 1
 		
-		if spawnRoll <= spawnQuadChance && mobsSpawned + 4 <= levelKillGoal:
-			spawnQuadlet(skullshipScene)
-			mobsSpawned += 4
+		else:
+			if spawnRoll <= spawnQuadChance:
+				spawnQuadlet(skullshipScene)
+				mobsSpawned += 4
+				
+			elif spawnRoll <= spawnTripleChance:
+				spawnTriplet(skullshipScene)
+				mobsSpawned += 3
+			elif spawnRoll <= spawnDoubleChance:
+				spawnDoublet(skullshipScene)
+				mobsSpawned += 2
+			elif spawnRoll <= spawnSingleChance:
+				spawnSinglet(skullshipScene)
+				mobsSpawned += 1
 			
-		elif spawnRoll <= spawnTripleChance && mobsSpawned + 3 <= levelKillGoal:
-			spawnTriplet(skullshipScene)
-			mobsSpawned += 3
-		elif spawnRoll <= spawnDoubleChance && mobsSpawned + 2 <= levelKillGoal:
-			spawnDoublet(skullshipScene)
-			mobsSpawned += 2
-		elif spawnRoll <= spawnSingleChance && mobsSpawned + 1 <= levelKillGoal:
-			spawnSinglet(skullshipScene)
-			mobsSpawned += 1
+			
 	
 	
 func spawnSinglet(mobScene, x = $spawnPoint.position.x, y = randi() % 600):

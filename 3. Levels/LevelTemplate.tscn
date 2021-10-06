@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://4. Scenes/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://4. Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://3. Levels/Level.gd" type="Script" id=3]
-[ext_resource path="res://4. Scenes/Spawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Utility/objectSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://4. Scenes/Menus/pauseMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://6. GUI/GUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://4. Scenes/mobSpawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://4. Scenes/Menus/loseMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 303.365 )
@@ -32,8 +33,6 @@ layer = -1
 position = Vector2( 498, 569 )
 z_index = 6
 z_as_relative = false
-
-[node name="Enemies" type="Node" parent="."]
 
 [node name="worldBorders" type="Node" parent="."]
 
@@ -75,9 +74,24 @@ shape = SubResource( 4 )
 
 [node name="GUI" parent="." instance=ExtResource( 6 )]
 
-[node name="Spawner" parent="." instance=ExtResource( 4 )]
-
 [node name="Timers" type="Node" parent="."]
+
+[node name="scoreTimer" type="Timer" parent="Timers"]
+autostart = true
 
 [node name="mobSpawner" parent="." instance=ExtResource( 7 )]
 levelKillGoal = 10
+
+[node name="loseMenu" parent="." instance=ExtResource( 8 )]
+
+[node name="objectSpawner" parent="." instance=ExtResource( 4 )]
+objectPath = "res://4. Scenes/Obstacles/Asteroid.tscn"
+spawnChance = 30
+spawnPosition = Vector2( 1050, 300 )
+ySpread = 250
+linearDirection = Vector2( -1, 0 )
+linearSpeed = 500
+angularSpeed = 5
+badLuckProtection = 5
+
+[connection signal="timeout" from="Timers/scoreTimer" to="." method="_on_scoreTimer_timeout"]

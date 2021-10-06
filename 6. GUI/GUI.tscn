@@ -115,8 +115,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="enemiesLeftLabel" type="Label" parent="Container/CenterContainer"]
+[node name="scoreLabel" type="Label" parent="Container/CenterContainer"]
 margin_top = 6.0
-margin_right = 316.0
+margin_right = 134.0
 margin_bottom = 33.0
-text = "Enemies remaining: "
+text = "Score: 0"
