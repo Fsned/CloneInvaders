@@ -124,8 +124,9 @@ func hurt(amount):
 			$AnimationPlayer.play("die")
 		alive = false
 		emit_signal("died", unitType)
-		if unitType == 1 or unitType == 2:
-			get_tree().call_group("levelManager", "unitDied", unitType)
+		$CollisionShape2D.set_deferred("disabled", true)
+#		if unitType == 1 or unitType == 2:
+		get_tree().call_group("levelManager", "unitDied", unitType)
 		return
 	
 	if $AnimationPlayer.has_animation("hurt"):
@@ -141,3 +142,4 @@ func spawnProjectile(speed, rotation = 0, _scenePath = "res://4. Scenes/Projecti
 	projectile.linear_velocity = ((Vector2($Forward.global_position - global_position)) * speed).rotated(rotation)
 	projectile.set_projectile_modulation(color)
 	add_child(projectile)
+

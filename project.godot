@@ -35,6 +35,7 @@ config/icon="res://icon.png"
 FileGrabber="*res://Utility/fileGrabber.gd"
 Dialog="*res://Utility/dialog.gd"
 Global="*res://Utility/global.gd"
+GameData="*res://Utility/gameData.gd"
 
 [input]
 

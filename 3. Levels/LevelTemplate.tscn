@@ -23,6 +23,7 @@ extents = Vector2( 515.115, 10 )
 
 [node name="LevelTemplate" type="Node2D" groups=[
 "levelManager",
+"persist",
 ]]
 script = ExtResource( 3 )
 

@@ -7,6 +7,8 @@ var enemiesAdded = false
 var meteosCollected = 0
 var score = 0
 
+var saveDict = {}
+
 func _ready():
 	get_tree().call_group("GUI", "setLevel", level)		
 
@@ -58,8 +60,8 @@ func _on_winTimer_timeout():
 func _on_loseTimer_timeout():
 	get_tree().paused = true
 	get_tree().call_group("loseMenu", "setScore", score)
+	GameData.saveGame()
 	$loseMenu.show()
-
 
 func _on_Player_died(_unitType):
 	print ("died")
@@ -72,3 +74,14 @@ func _on_scoreTimer_timeout():
 	
 func getScore():
 	return score
+	
+
+	
+	
+func saveData():
+	var saveData = {}
+	
+	saveData["score"] = score
+	
+	return saveData
+	

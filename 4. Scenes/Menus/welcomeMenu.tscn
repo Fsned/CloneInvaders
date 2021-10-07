@@ -6,15 +6,15 @@
 [ext_resource path="res://4. Scenes/Menus/theme.tres" type="Theme" id=5]
 [ext_resource path="res://Utility/objectSpawner.tscn" type="PackedScene" id=6]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "zoomzoom"
 loop = true
 step = 0.5
@@ -102,7 +102,7 @@ alignment = 1
 [node name="Label2" type="Label" parent="Background/CenterContainer2/VBoxContainer"]
 margin_right = 343.0
 margin_bottom = 27.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Welcome to"
 align = 1
 
@@ -112,7 +112,7 @@ margin_right = 343.0
 margin_bottom = 67.0
 grow_horizontal = 0
 grow_vertical = 0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Clone Invaders"
 align = 1
 valign = 3
@@ -120,7 +120,7 @@ valign = 3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background/CenterContainer2/VBoxContainer/Label"]
 autoplay = "zoomzoom"
 playback_default_blend_time = 1.0
-anims/zoomzoom = SubResource( 4 )
+anims/zoomzoom = SubResource( 3 )
 
 [node name="objectSpawner" parent="." instance=ExtResource( 6 )]
 spawnTimerWaitTime = 4
