@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/upright-piano-arcade-instrumental-mix-1342.wav-c61a2f7c3a892572cbd668de4b132f19.sample"
+
+[deps]
+
+source_file="res://2. SFX/upright-piano-arcade-instrumental-mix-1342.wav"
+dest_files=[ "res://.import/upright-piano-arcade-instrumental-mix-1342.wav-c61a2f7c3a892572cbd668de4b132f19.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

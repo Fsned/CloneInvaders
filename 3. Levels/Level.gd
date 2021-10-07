@@ -60,7 +60,14 @@ func _on_winTimer_timeout():
 func _on_loseTimer_timeout():
 	get_tree().paused = true
 	get_tree().call_group("loseMenu", "setScore", score)
-	GameData.saveGame()
+	
+	if score > GameData.getKey("score"):
+		print ("Overwriting highscore!")
+		GameData.setKey("score", score)
+		
+	else:
+		print ("score not good enough :P")
+		
 	$loseMenu.show()
 
 func _on_Player_died(_unitType):
@@ -77,11 +84,7 @@ func getScore():
 	
 
 	
-	
-func saveData():
-	var saveData = {}
-	
-	saveData["score"] = score
-	
-	return saveData
-	
+func getSaveData():
+	var data = {}
+	data["score"] = score
+	return data

@@ -36,6 +36,7 @@ FileGrabber="*res://Utility/fileGrabber.gd"
 Dialog="*res://Utility/dialog.gd"
 Global="*res://Utility/global.gd"
 GameData="*res://Utility/gameData.gd"
+BackgroundMusic="*res://4. Scenes/Sound/BackgroundMusic.tscn"
 
 [input]
 

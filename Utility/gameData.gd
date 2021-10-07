@@ -2,30 +2,62 @@ extends Node
 
 const saveFilePath = "res://Utility/saveData.save"
 
+var defaultData = {
+	"score": 0,
+	"musicVolume": 60,
+	"sfxVolume": 60
+}
+
+
+var data = {}
 
 func saveGame():
-	var persistingNodes = get_tree().get_nodes_in_group("persist")
+	var file
 	
-	var saveData = {}
-	for node in persistingNodes:
-		saveData.append() += node.call("saveData")
-		
-	if saveData == {}:
-		print ("No data to save")
-		
-	var saveFile = File.new()
-	saveFile.open(saveFilePath, File.WRITE)
-	saveFile.store_string(to_json(saveData))
-	saveFile.close()
+	for node in get_tree().get_nodes_in_group("persist"):
+		var nodeData = node.call("getSaveData")
+		for item in nodeData:
+			data[str(item)] = nodeData[str(item)]
+	
+	
+	file = File.new()
+	file.open(saveFilePath, File.WRITE)
+	file.store_line(to_json(data))
+	file.close()
 	
 	
 func loadGame(scope = "all"):
-	var saveFile = File.new()
-	if ! saveFile.file_exists(saveFilePath):
-		print ("Couldn't find saveFile in path: " + saveFilePath)
-		return false
+	var file = File.new()
+	
+	if not file.file_exists(saveFilePath):
+		resetData()
+		return data
 		
-	saveFile.open(saveFilePath, File.READ)
-	var content = saveFile.get_as_text()
-	saveFile.close()
-	return to_json(content)
+	file.open(saveFilePath, file.READ)
+	
+	var text = file.get_as_text()
+	
+	data = parse_json(text)
+	file.close()
+	
+	return data
+	
+	
+func getKey(key):
+	loadGame()
+	
+	if ! key in data:
+		data[key] = defaultData[key]
+		return data[key]
+	
+	
+	
+func setKey(key, value):
+	loadGame()
+	data[key] = value
+	saveGame()
+	
+	print ("Setting " + key + " to: " + str(value))
+	
+func resetData():
+	data = defaultData

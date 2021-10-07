@@ -4,12 +4,12 @@ extends Node2D
 func _ready():
 	Input.set_custom_mouse_cursor(load("res://1. GFX/GUI/Reticle3.png"), 0, Vector2(24,24))
 	
-	var data = GameData.loadGame()
+	var highscore = GameData.getKey("score")
 	
-	if data != false:
-		if data["score"] != null:
-			print ("i loaded the score: " + str(data["score"]))
-	
+	if highscore == 0: $Background/CenterContainer3.visible = false
+	else: 
+		$Background/CenterContainer3.visible = true
+		$Background/CenterContainer3/HBoxContainer/Label2.text = str(highscore)
 	
 func _on_NewGameButton_pressed():
 	print ("New game")
@@ -31,6 +31,9 @@ func _on_PlayTutorialButton_pressed():
 	var _a = get_tree().change_scene("res://3. Levels/LevelTutorial.tscn")
 
 
+func _on_SettingButton_pressed():
+	$settings.show()
+	
 #func loadSavedData():
 ##	var levelNode = get_tree().get_root().find_node("Level1", true, false)
 ##
@@ -47,3 +50,5 @@ func _on_PlayTutorialButton_pressed():
 	
 	
 	
+
+

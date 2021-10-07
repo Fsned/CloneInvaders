@@ -103,6 +103,10 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( -0.58992, 0.15871 )
 
+[node name="Forward" parent="." index="4"]
+visible = true
+position = Vector2( 35, 0 )
+
 [node name="AnimationPlayer" parent="." index="6"]
 playback_speed = 2.0
 anims/die = SubResource( 1 )
