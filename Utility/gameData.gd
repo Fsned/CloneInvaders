@@ -11,16 +11,13 @@ var defaultData = {
 
 var data = {}
 
+
+func _ready():
+	loadGame()
+
+	
 func saveGame():
-	var file
-	
-	for node in get_tree().get_nodes_in_group("persist"):
-		var nodeData = node.call("getSaveData")
-		for item in nodeData:
-			data[str(item)] = nodeData[str(item)]
-	
-	
-	file = File.new()
+	var file = File.new()
 	file.open(saveFilePath, File.WRITE)
 	file.store_line(to_json(data))
 	file.close()
@@ -31,29 +28,32 @@ func loadGame(scope = "all"):
 	
 	if not file.file_exists(saveFilePath):
 		resetData()
-		return data
+		saveGame()
+		return
 		
 	file.open(saveFilePath, file.READ)
-	
 	var text = file.get_as_text()
-	
-	data = parse_json(text)
 	file.close()
-	
-	return data
+	data = parse_json(text)
+	return
 	
 	
 func getKey(key):
 	loadGame()
 	
-	if ! key in data:
-		data[key] = defaultData[key]
+	if key in data:
 		return data[key]
 	
-	
+	else:
+		if ! key in defaultData:
+			print("Data missing in defaultData: " + str(key))
+			return 0
+		else:
+			data[key] = defaultData[key]
+			return defaultData[key]
 	
 func setKey(key, value):
-	loadGame()
+#	loadGame()
 	data[key] = value
 	saveGame()
 	

@@ -13,15 +13,9 @@ _global_script_classes=[ {
 "class": "PlayerProperties",
 "language": "GDScript",
 "path": "res://Utility/PlayerProperties.gd"
-}, {
-"base": "Node",
-"class": "PoolMultilineStringArray",
-"language": "GDScript",
-"path": "res://Utility/PoolMultilineStringArray.gd"
 } ]
 _global_script_class_icons={
-"PlayerProperties": "res://1. GFX/Spaceships/Player.png",
-"PoolMultilineStringArray": ""
+"PlayerProperties": "res://1. GFX/Spaceships/Player.png"
 }
 
 [application]

@@ -9,7 +9,7 @@ export var level = ""
 
 func _ready():
 	processActionBar()
-	
+	$Container/CenterContainer/scoreLabel.self_modulate = "ffffff"
 	
 	
 func processActionBar():
@@ -50,3 +50,7 @@ func _on_Player_healthChanged(value):
 
 func toggleEnemiesRemaining():
 	$Container/CenterContainer/enemiesLeftLabel.visible = !$Container/CenterContainer/enemiesLeftLabel.visible
+
+
+func newHighscore():
+	$Container/CenterContainer/scoreLabel.self_modulate = "1d9f25"

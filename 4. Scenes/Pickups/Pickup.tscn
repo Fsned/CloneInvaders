@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://1. GFX/Misc/BareBox.png" type="Texture" id=1]
 [ext_resource path="res://1. GFX/Kenney/PNG/Default/effect_yellow.png" type="Texture" id=2]
+[ext_resource path="res://4. Scenes/Pickups/Pickup.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.2002, 15.1233 )
 
 [node name="Pickup" type="RigidBody2D"]
+script = ExtResource( 3 )
 
 [node name="BoxSprite" type="Sprite" parent="."]
 position = Vector2( -0.160558, -0.298784 )

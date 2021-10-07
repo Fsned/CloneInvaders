@@ -2,6 +2,8 @@ extends Node2D
 
 
 func _ready():
+	
+	
 	Input.set_custom_mouse_cursor(load("res://1. GFX/GUI/Reticle3.png"), 0, Vector2(24,24))
 	
 	var highscore = GameData.getKey("score")
@@ -18,6 +20,7 @@ func _on_NewGameButton_pressed():
 
 
 func _on_QuitButton_pressed():
+	GameData.saveGame()
 	get_tree().quit()
 
 

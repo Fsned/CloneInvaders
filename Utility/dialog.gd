@@ -8,6 +8,10 @@ signal seriesDialogClosed
 func _ready():
 	add_to_group("dialogs")
 
+
+
+
+
 func openDialogBox(dialogBoxText, showSpaceTooltip = false, seriesId = ""):
 	var dialogBox = load("res://6. GUI/DialogBox.tscn").instance()
 	dialogBox.setText(dialogBoxText)
@@ -17,8 +21,11 @@ func openDialogBox(dialogBoxText, showSpaceTooltip = false, seriesId = ""):
 	
 	if seriesId != "":
 		dialogBox.setSeries(seriesId)
-	
-	
+
+
+
+
+
 func createDialogSeries(seriesId, timeToggled = false, spaceToggled = false, timeToggleTimer = 0):
 	series[seriesId] = {"timeToggled": timeToggled,
 						"spaceToggled": spaceToggled,
@@ -33,12 +40,17 @@ func deleteSeries(seriesId):
 	if series[seriesId] == null: return false
 	series.erase(seriesId)
 	return true
-		
-	
+
+
+
+
+
 func addDialogToSeries(seriesId, dialogBoxText, _showSpaceTooltip = false):
 	if series[seriesId] == null: return false
 	series[seriesId]["dialogs"].push_back(dialogBoxText)
-	print ("Added dialog to series: " + seriesId + ", dialog: " + dialogBoxText)
+
+
+
 
 func playSeries(seriesId):
 	if series[seriesId] == null: return false
@@ -50,12 +62,15 @@ func playSeries(seriesId):
 	
 	return true
 	pass
-	
+
+
+
+
 
 func nextSeriesDialog(seriesId):
 	if series[seriesId] == null: return false
 	if series[seriesId]["playing"] == false: return false
-	
+
 	if series[seriesId]["dialogs"].size() > series[seriesId]["currentDialog"] + 1:
 		series[seriesId]["currentDialog"] = series[seriesId]["currentDialog"] + 1
 		get_tree().call_group("dialogs", "closeAllDialogs")
@@ -65,15 +80,19 @@ func nextSeriesDialog(seriesId):
 	else:
 		series.erase(seriesId)
 		emit_signal("seriesDialogClosed")
-	
-		
-	
+
+
+
 func openDialogBoxWith1Button(_dialogBoxText, _buttonText):
 	pass
-	
-	
+
+
+
+
 func openDialogBoxWith2Buttons(_dialogBoxText, _button1Text, _button1Group, _button1Signal, _button2Text, _button2Group, _button2Signal):
 	pass
+
+
 
 
 func seriesDialogClosed(seriesId):
