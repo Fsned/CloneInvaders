@@ -1,63 +1,36 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://4. Scenes/AsteroidSpawner.tscn" type="PackedScene" id=1]
-[ext_resource path="res://4. Scenes/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://4. Scenes/Menus/settings.tscn" type="PackedScene" id=1]
+[ext_resource path="res://3. Levels/Background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://1. GFX/Fonts/Kenney Future.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://4. Scenes/Menus/welcomeMenu.gd" type="Script" id=4]
+[ext_resource path="res://4. Scenes/Menus/theme.tres" type="Theme" id=5]
+[ext_resource path="res://Utility/objectSpawner.tscn" type="PackedScene" id=6]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.6, 0.6, 0.6, 0.294118 )
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-expand_margin_left = 5.0
-expand_margin_right = 5.0
-expand_margin_top = 5.0
-expand_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.6, 0.6, 0.6, 0.294118 )
-draw_center = false
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-expand_margin_left = 5.0
-expand_margin_right = 5.0
-expand_margin_top = 5.0
-expand_margin_bottom = 5.0
-
-[sub_resource type="DynamicFont" id=3]
-size = 28
+[sub_resource type="DynamicFont" id=1]
+size = 24
 font_data = ExtResource( 3 )
 
-[sub_resource type="Theme" id=4]
-default_font = SubResource( 3 )
-Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-Button/constants/hseparation = 2
-Button/fonts/font = null
-Button/styles/disabled = null
-Button/styles/focus = null
-Button/styles/hover = SubResource( 1 )
-Button/styles/normal = null
-Button/styles/pressed = SubResource( 2 )
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-draw_center = false
+[sub_resource type="Animation" id=3]
+resource_name = "zoomzoom"
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
+}
 
 [node name="welcomeMenu" type="Node2D"]
 script = ExtResource( 4 )
@@ -65,44 +38,140 @@ script = ExtResource( 4 )
 [node name="Background" parent="." instance=ExtResource( 2 )]
 layer = -1
 
-[node name="AsteroidSpawner" parent="Background" instance=ExtResource( 1 )]
-
 [node name="CenterContainer" type="CenterContainer" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( 4 )
+theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/CenterContainer"]
-margin_left = 421.0
-margin_top = 248.0
-margin_right = 603.0
-margin_bottom = 352.0
-custom_constants/separation = 40
+margin_left = 402.0
+margin_top = 195.0
+margin_right = 621.0
+margin_bottom = 405.0
+custom_constants/separation = 30
 
 [node name="NewGameButton" type="Button" parent="Background/CenterContainer/VBoxContainer"]
-margin_right = 182.0
-margin_bottom = 32.0
-custom_styles/normal = SubResource( 5 )
+margin_right = 219.0
+margin_bottom = 30.0
+theme = ExtResource( 5 )
 text = "New game"
 
-[node name="LoadGameButton" type="Button" parent="Background/CenterContainer/VBoxContainer"]
+[node name="NewGameButton2" type="Button" parent="Background/CenterContainer/VBoxContainer"]
 visible = false
-margin_top = 72.0
-margin_right = 198.0
-margin_bottom = 104.0
-custom_styles/normal = SubResource( 5 )
+margin_top = 60.0
+margin_right = 219.0
+margin_bottom = 90.0
+theme = ExtResource( 5 )
 text = "Load game"
 
+[node name="PlayTutorialButton" type="Button" parent="Background/CenterContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 219.0
+margin_bottom = 90.0
+theme = ExtResource( 5 )
+text = "Play tutorial"
+
+[node name="SettingButton" type="Button" parent="Background/CenterContainer/VBoxContainer"]
+margin_top = 120.0
+margin_right = 219.0
+margin_bottom = 150.0
+theme = ExtResource( 5 )
+text = "Settings"
+
 [node name="QuitButton" type="Button" parent="Background/CenterContainer/VBoxContainer"]
-margin_top = 72.0
-margin_right = 182.0
-margin_bottom = 104.0
-custom_styles/normal = SubResource( 5 )
+margin_top = 180.0
+margin_right = 219.0
+margin_bottom = 210.0
+theme = ExtResource( 5 )
 text = "Quit"
 
+[node name="CenterContainer2" type="CenterContainer" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 0.4
+margin_bottom = -116.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/CenterContainer2"]
+margin_left = 340.0
+margin_top = 28.0
+margin_right = 683.0
+margin_bottom = 95.0
+grow_horizontal = 0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Background/CenterContainer2/VBoxContainer"]
+margin_right = 343.0
+margin_bottom = 27.0
+custom_fonts/font = SubResource( 1 )
+text = "Welcome to"
+align = 1
+
+[node name="Label" type="Label" parent="Background/CenterContainer2/VBoxContainer"]
+margin_top = 31.0
+margin_right = 343.0
+margin_bottom = 67.0
+grow_horizontal = 0
+grow_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "Clone Invaders"
+align = 1
+valign = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/CenterContainer2/VBoxContainer/Label"]
+autoplay = "zoomzoom"
+playback_default_blend_time = 1.0
+anims/zoomzoom = SubResource( 3 )
+
+[node name="CenterContainer3" type="CenterContainer" parent="Background"]
+anchor_top = 0.888
+anchor_bottom = 0.998
+margin_right = 290.0
+grow_horizontal = 0
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/CenterContainer3"]
+margin_left = 51.0
+margin_top = 20.0
+margin_right = 238.0
+margin_bottom = 46.0
+
+[node name="Label" type="Label" parent="Background/CenterContainer3/HBoxContainer"]
+margin_right = 165.0
+margin_bottom = 26.0
+text = "Highscore: "
+
+[node name="Label2" type="Label" parent="Background/CenterContainer3/HBoxContainer"]
+margin_left = 169.0
+margin_right = 187.0
+margin_bottom = 26.0
+text = "0"
+
+[node name="objectSpawner" parent="." instance=ExtResource( 6 )]
+isActive = true
+objectPath = "res://4. Scenes/Objects/Asteroid.tscn"
+spawnTimerWaitTime = 4
+spawnChance = 30
+spawnPosition = Vector2( 1050, 400 )
+ySpread = 200
+linearDirection = Vector2( -1, 0 )
+linearSpeed = 100
+angularSpeed = 3
+badLuckProtection = 10
+
+[node name="settings" parent="." instance=ExtResource( 1 )]
+
 [connection signal="pressed" from="Background/CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
-[connection signal="pressed" from="Background/CenterContainer/VBoxContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="pressed" from="Background/CenterContainer/VBoxContainer/PlayTutorialButton" to="." method="_on_PlayTutorialButton_pressed"]
+[connection signal="pressed" from="Background/CenterContainer/VBoxContainer/SettingButton" to="." method="_on_SettingButton_pressed"]
 [connection signal="pressed" from="Background/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

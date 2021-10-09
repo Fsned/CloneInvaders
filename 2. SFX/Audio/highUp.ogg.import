@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/highUp.ogg-f7efde27eec536038baef7c58d1af2c9.oggstr"
+
+[deps]
+
+source_file="res://2. SFX/Audio/highUp.ogg"
+dest_files=[ "res://.import/highUp.ogg-f7efde27eec536038baef7c58d1af2c9.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
