@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://4. Scenes/Characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://4. Scenes/Characters/Player.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://1. GFX/Kenney/PNG/Retina/explosion4.png" type="Texture" id=7]
 [ext_resource path="res://1. GFX/Kenney/PNG/Retina/explosion1.png" type="Texture" id=8]
 [ext_resource path="res://1. GFX/Kenney/PNG/Retina/explosion3.png" type="Texture" id=9]
+[ext_resource path="res://1. GFX/Misc/WhiteDot.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "die"
@@ -90,6 +91,31 @@ tracks/2/keys = {
 "values": [ Vector2( -17.0521, 0 ), Vector2( -12.2133, 0 ) ]
 }
 
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.317829, 0.643411, 1 )
+colors = PoolColorArray( 0.76123, 0.76123, 0.76123, 1, 0.756422, 0.776855, 0.179041, 1, 0.679199, 0, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0.851136 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.323864 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+resource_local_to_scene = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+gravity = Vector3( -1000, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.4
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 4 )
+
 [node name="Player" groups=[
 "player",
 ] instance=ExtResource( 1 )]
@@ -112,6 +138,7 @@ playback_speed = 2.0
 anims/die = SubResource( 1 )
 
 [node name="exhaustFire" type="Sprite" parent="." index="7"]
+visible = false
 self_modulate = Color( 0.980392, 0.717647, 0, 1 )
 position = Vector2( -17.0521, 0 )
 rotation = -4.71238
@@ -122,5 +149,15 @@ texture = ExtResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="exhaustFire" index="0"]
 autoplay = "animateExhaust"
 anims/animateExhaust = SubResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="." index="9"]
+show_behind_parent = true
+position = Vector2( -5.61865, 0 )
+scale = Vector2( 0.2, 0.2 )
+amount = 10
+lifetime = 0.4
+local_coords = false
+process_material = SubResource( 5 )
+texture = ExtResource( 10 )
 
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
