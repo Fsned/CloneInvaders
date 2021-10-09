@@ -13,7 +13,7 @@ func _ready():
 
 
 func openDialogBox(dialogBoxText, showSpaceTooltip = false, seriesId = ""):
-	var dialogBox = load("res://6. GUI/DialogBox.tscn").instance()
+	var dialogBox = load("res://4. Scenes/Dialog/DialogBox.tscn").instance()
 	dialogBox.setText(dialogBoxText)
 	dialogBox.displaySpaceTip = showSpaceTooltip
 	add_child(dialogBox)

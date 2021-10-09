@@ -22,4 +22,7 @@ autostart = true
 levelKillGoal = 0
 isActive = false
 
+[node name="objectSpawner" parent="." index="8"]
+objectPath = "res://4. Scenes/Objects/Asteroid.tscn"
+
 [connection signal="timeout" from="Timers/dialogTimer" to="." method="_on_dialogTimer_timeout"]

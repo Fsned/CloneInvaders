@@ -17,10 +17,14 @@ one_shot = true
 [node name="loseTimer" type="Timer" parent="Timers" index="1"]
 one_shot = true
 
-[node name="mobSpawner" parent="." index="6"]
+[node name="mobSpawner" parent="Spawners" index="0"]
+spawnDoubleChance = 10
 spawnTripleChance = 4
-spawnQuadChance = 1
+spawnQuadChance = 2
 levelKillGoal = 0
+
+[node name="asteroidSpawner" parent="Spawners" index="1"]
+objectPath = "res://4. Scenes/Objects/Asteroid.tscn"
 
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
 [connection signal="healthChanged" from="Player" to="GUI" method="_on_Player_healthChanged"]

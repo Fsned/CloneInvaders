@@ -1,7 +1,8 @@
 extends Popup
 
 
-
+	
+	
 func _input(_event):
 	if Input.is_action_just_pressed("Pause"):
 		if get_tree().get_root().find_node("loseMenu", true, false).visible == false:
@@ -42,3 +43,11 @@ func _on_MenuButton_pressed():
 	togglePauseMenu()
 	var _a = get_tree().change_scene("res://4. Scenes/Menus/welcomeMenu.tscn")
 	get_tree().call_group("dialogs", "closeAllDialogs")
+
+
+func _on_SettingsButton_pressed():
+	$settings.visible = !$settings.visible
+
+
+func _on_FeedbackButton_pressed():
+	$Trello_Reporting_Tool.show_window()

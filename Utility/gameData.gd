@@ -23,7 +23,7 @@ func saveGame():
 	file.close()
 	
 	
-func loadGame(scope = "all"):
+func loadGame(_scope = "all"):
 	var file = File.new()
 	
 	if not file.file_exists(saveFilePath):

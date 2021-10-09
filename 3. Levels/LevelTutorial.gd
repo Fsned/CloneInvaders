@@ -1,4 +1,4 @@
-extends "res://3. Levels/Level.gd"
+extends "res://3. Levels/LevelTemplate.gd"
 
 
 

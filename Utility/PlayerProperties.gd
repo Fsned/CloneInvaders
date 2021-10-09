@@ -47,3 +47,14 @@ func levelUp():
 	expGoal = ((playerLevel - 1) * expLevelUpMultiplier * initialExpGoal)
 	print ("You just levelled up to level " + str(playerLevel) + "!")
 	
+func heal(amount):
+	currentHealth += amount
+	if currentHealth > maxHealth:
+		currentHealth = maxHealth
+
+
+
+func setMaxHealth(amount):
+	maxHealth = amount
+	if currentHealth > maxHealth:
+		currentHealth = maxHealth

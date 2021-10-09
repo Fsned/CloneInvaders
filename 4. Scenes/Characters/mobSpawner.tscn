@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://4. Scenes/Characters/mobSpawner.gd" type="Script" id=2]
+
+[node name="mobSpawner" type="Node"]
+script = ExtResource( 2 )
+levelKillGoal = 2000
+
+[node name="spawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="spawnPoint" type="Position2D" parent="."]
+position = Vector2( 1078.78, 289.173 )
+
+[connection signal="timeout" from="spawnTimer" to="." method="_on_spawnTimer_timeout"]

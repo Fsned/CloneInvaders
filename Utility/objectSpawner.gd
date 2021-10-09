@@ -1,7 +1,7 @@
 extends Node
 
-export var spawn = true
-export (String, MULTILINE) var objectPath
+export var isActive = false
+export (String, MULTILINE) var objectPath = ""
 
 export (int, 0.1, 100.0) var spawnTimerWaitTime = 3.0
 export (int, 0, 100) var spawnChance = 100
@@ -23,7 +23,7 @@ var object
 export (int, 0.0, 100.0) var badLuckProtection = 0.00
 
 func _ready():
-	if spawn:
+	if isActive:
 		$spawnTimer.wait_time = spawnTimerWaitTime 
 		$spawnTimer.start()
 
@@ -39,22 +39,24 @@ func _on_spawnTimer_timeout():
 	else:
 		spawnChance += badLuckProtection
 	
-	
+	if isActive:
+		$spawnTimer.start()
 	
 func spawnThing():
-	var spawnObject = load(objectPath).instance()
-	var randomSpreadX = 0
-	var randomSpreadY = 0
-	
-	if xSpread > 0:	randomSpreadX = (randi() % (xSpread*2)) - xSpread
-	if ySpread > 0: randomSpreadY = (randi() % (ySpread*2)) - ySpread
-	 
-	spawnObject.position.x = spawnPosition.x + randomSpreadX
-	spawnObject.position.y = spawnPosition.y + randomSpreadY
-	
-	spawnObject.linear_velocity = linearDirection * linearSpeed
-	
-	spawnObject.linear_velocity = spawnObject.linear_velocity.rotated((linearRotation/180) * PI)
-	spawnObject.angular_velocity = angularSpeed
-	
-	add_child(spawnObject)
+	if objectPath != "":
+		var spawnObject = load(objectPath).instance()
+		var randomSpreadX = 0
+		var randomSpreadY = 0
+		
+		if xSpread > 0:	randomSpreadX = (randi() % (xSpread*2)) - xSpread
+		if ySpread > 0: randomSpreadY = (randi() % (ySpread*2)) - ySpread
+		 
+		spawnObject.position.x = spawnPosition.x + randomSpreadX
+		spawnObject.position.y = spawnPosition.y + randomSpreadY
+		
+		spawnObject.linear_velocity = linearDirection * linearSpeed
+		
+		spawnObject.linear_velocity = spawnObject.linear_velocity.rotated((linearRotation/180) * PI)
+		spawnObject.angular_velocity = angularSpeed
+		
+		add_child(spawnObject)
