@@ -26,6 +26,12 @@ levelKillGoal = 0
 [node name="asteroidSpawner" parent="Spawners" index="1"]
 objectPath = "res://4. Scenes/Objects/Asteroid.tscn"
 
+[node name="healthSpawner" parent="Spawners" index="2"]
+linearSpeed = 350
+
+[node name="shootingSpeedSpawner" parent="Spawners" index="3"]
+linearSpeed = 350
+
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
 [connection signal="healthChanged" from="Player" to="GUI" method="_on_Player_healthChanged"]
 [connection signal="timeout" from="Timers/winTimer" to="." method="_on_winTimer_timeout"]

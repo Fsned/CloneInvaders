@@ -11,7 +11,7 @@ enum pickupType {
 }
 
 func _ready():
-	$Particles2D.texture = $upgradeSprite.texture
+#	$Particles2D.texture = $upgradeSprite.texture
 	$Particles2D.scale = Vector2(0.2, 0.2)
 
 
