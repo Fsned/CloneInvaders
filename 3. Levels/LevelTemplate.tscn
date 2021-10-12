@@ -110,15 +110,4 @@ linearSpeed = 500
 angularSpeed = 5
 badLuckProtection = 5
 
-[node name="shootingSpeedSpawner" parent="Spawners" instance=ExtResource( 4 )]
-isActive = true
-objectPath = "res://4. Scenes/Objects/shootingSpeed.tscn"
-spawnChance = 30
-spawnPosition = Vector2( 1050, 300 )
-ySpread = 250
-linearDirection = Vector2( -1, 0 )
-linearSpeed = 500
-angularSpeed = 5
-badLuckProtection = 5
-
 [connection signal="timeout" from="Timers/scoreTimer" to="." method="_on_scoreTimer_timeout"]
