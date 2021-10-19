@@ -28,16 +28,22 @@ var goalPosition
 var navigationPaused = false
 var possibleDestinations = []
 
+var parentNode
+
 
 onready var navigation = get_tree().get_root().find_node("Navigation2D", true, false)
 onready var availableDestinations
 var path
-
+var scrapInstance
 
 
 func _ready():
+	parentNode = get_tree().get_root().find_node("Scraps", true, false)
+	var scraps = FileGrabber.fileGrab("res://4. Scenes/Objects/scraps/", 1, ".tscn")
+	scrapInstance = load(scraps[randi() % scraps.size()])
 	makePath()
 	properties.setMaxHealth(50)
+	projectileSpeed = 10
 	
 	
 	
@@ -46,14 +52,19 @@ func _physics_process(delta):
 		if (moveForward): handleMoveForward(delta)
 		if (lookAtPlayer): look_at(Global.getPlayerPosition())
 		if (followPath): navigate(delta)
-		if (shooting): handleEnemyInput()
+		if (shooting): handleEnemyInput(delta)
 		if (charge): handleCharge(delta)
 
 
 
 func handleMoveForward(delta):
-	motion = ((global_position + Vector2(-1, 0)) - global_position).normalized() * moveForwardSpeed * delta
-	var _a = move_and_slide(motion, Vector2(0, -1))		
+	if canMove:
+		motion = ((global_position + Vector2(-1, 0)) - global_position).normalized() * moveForwardSpeed * delta
+	else:
+		motion = move_and_slide(Vector2.ZERO, Vector2(0, -1))
+			
+			
+	var _a = move_and_slide(motion, Vector2(0, -1))
 
 func navigate(delta):
 	if (navigationPaused): return
@@ -124,9 +135,15 @@ func startCharge():
 	if followPath: toggleNavigation()
 	if shooting: toggleShooting()
 	
+	
 func disappear():
 	get_tree().call_group("levelManager", "mobDied", "skeleton")
+	var scrapCopy = scrapInstance.instance()
+	scrapCopy.global_transform = global_transform
+	parentNode.add_child(scrapCopy)
 	queue_free()
+	
+	
 	
 
 

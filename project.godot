@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "PlayerProperties",
 "language": "GDScript",
 "path": "res://Utility/PlayerProperties.gd"
+}, {
+"base": "Node2D",
+"class": "Weapons",
+"language": "GDScript",
+"path": "res://Utility/Weapon.gd"
 } ]
 _global_script_class_icons={
-"PlayerProperties": "res://1. GFX/Spaceships/Player.png"
+"PlayerProperties": "res://1. GFX/Spaceships/Player.png",
+"Weapons": ""
 }
 
 [application]
@@ -31,6 +37,7 @@ Dialog="*res://Utility/dialog.gd"
 Global="*res://Utility/global.gd"
 GameData="*res://Utility/gameData.gd"
 BackgroundMusic="*res://4. Scenes/Sound/BackgroundMusic.tscn"
+Weapon="*res://Utility/Weapon.gd"
 
 [input]
 
@@ -77,6 +84,21 @@ scrollDown={
 nextDialog={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+UpgradeShot={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"unicode":0,"echo":false,"script":null)
+ ]
+}
+UpgradeHull={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"unicode":0,"echo":false,"script":null)
+ ]
+}
+UpgradeWeapon={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
  ]
 }
 

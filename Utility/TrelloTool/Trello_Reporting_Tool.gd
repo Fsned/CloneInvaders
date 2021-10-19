@@ -105,39 +105,39 @@ class Attachment:
 		return obj
 
 func create_post_data(key: String, value) -> PoolByteArray:
-	var body: PoolByteArray
-	var extra: String = ''
-	var bytes: PoolByteArray
+#	var body: PoolByteArray 
+#	var extra: String = ''
+#	var bytes: PoolByteArray
 
 	if value is Array:
 		for idx in range(0, value.size()):
-			var newkey = "%s[%d]" % [key, idx]
-			body += create_post_data(newkey, value[idx])
-		return body
-	elif value is Attachment.Struct:
-		extra = '; filename="' + value.filename + '"'
-		if value.mimetype != 'application/octet-stream':
-			extra += '\r\nContent-Type: ' + value.mimetype
-		bytes = value.data
-	elif value != null:
-		bytes = value.to_utf8()
+			var _newkey = "%s[%d]" % [key, idx]
+#			body += create_post_data(newkey, value[idx])
+#		return body
+#	elif value is Attachment.Struct:
+#		extra = '; filename="' + value.filename + '"'
+#		if value.mimetype != 'application/octet-stream':
+#			extra += '\r\nContent-Type: ' + value.mimetype
+#		bytes = value.data
+#	elif value != null:
+#		bytes = value.to_utf8()
 
-	var buf = 'Content-Disposition: form-data; name="' + key + '"' + extra
-	body += ('--' + POST_BOUNDARY + '\r\n' + buf + '\r\n\r\n').to_ascii()
-	body += bytes + '\r\n'.to_ascii()
-	return body
+#	var buf = 'Content-Disposition: form-data; name="' + key + '"' + extra
+#	body += ('--' + POST_BOUNDARY + '\r\n' + buf + '\r\n\r\n').to_ascii()
+#	body += bytes + '\r\n'.to_ascii()
+	return PoolByteArray(["",""])
 
-func send_post(http: HTTPClient, path: String, data: Dictionary) -> int:
+func send_post(httpc: HTTPClient, path: String, _data: Dictionary) -> int:
 	var headers = [
 		'Content-Type: multipart/form-data; boundary=' + POST_BOUNDARY,
 	]
 
-	var body: PoolByteArray
-	for key in data:
-		body += create_post_data(key, data[key])
-	body += ('--' + POST_BOUNDARY + '--\r\n').to_ascii()
+#	var body: PoolByteArray
+#	for key in data:
+#		body += create_post_data(key, data[key])
+#	body += ('--' + POST_BOUNDARY + '--\r\n').to_ascii()
 
-	return http.request_raw(HTTPClient.METHOD_POST, path, headers, body)
+	return httpc.request_raw(HTTPClient.METHOD_POST, path, headers, PoolByteArray(["",""]))
 
 func parse_url(url: String) -> Dictionary:
 	var regex = RegEx.new()
@@ -246,7 +246,7 @@ func create_card():
 	if http.has_response() && http.get_response_code() != 200:
 		timeout = 30.0
 		timer.start()
-		var response: PoolByteArray
+		var response: PoolByteArray = PoolByteArray(["",""])
 		while http.get_status() == HTTPClient.STATUS_BODY:
 			http.poll()
 			var chunk = http.read_response_body_chunk()
@@ -257,8 +257,8 @@ func create_card():
 					change_feedback("Timeout waiting for server response :-(")
 					timer.stop()
 					return
-			else:
-				response += chunk
+#			else:
+#				response += chunk
 		timer.stop()
 		feedback.text = 'Error from server: ' + response.get_string_from_utf8()
 		return
