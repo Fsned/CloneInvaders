@@ -133,6 +133,14 @@ color_ramp = SubResource( 4 )
 ] instance=ExtResource( 1 )]
 collision_layer = 1
 script = ExtResource( 2 )
+unitType = 0
+currentWeapon = 0
+SPEED = 10000
+invincible = true
+canMove = true
+frozenTimer = 0
+shotCooldown = 1.0
+canCollectCoins = true
 
 [node name="Sprite" parent="." index="0"]
 self_modulate = Color( 0.52549, 0.52549, 0.52549, 1 )

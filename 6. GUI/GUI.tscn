@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://6. GUI/GUI.gd" type="Script" id=1]
 [ext_resource path="res://6. GUI/HealthBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://6. GUI/PowerBar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://1. GFX/Obstacles/SmallAsteroid.png" type="Texture" id=4]
+[ext_resource path="res://1. GFX/Misc/Junk.png" type="Texture" id=4]
 [ext_resource path="res://1. GFX/Fonts/Kenney Future.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://6. GUI/ActionBar.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -58,47 +59,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -112.0
 margin_top = -86.0
+margin_right = -23.0
 grow_vertical = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/RightSideContainer"]
-margin_right = 777.0
-margin_bottom = 64.0
+margin_right = 754.0
+margin_bottom = 32.0
 alignment = 2
 
 [node name="MeteoriteCounter" type="Label" parent="Container/RightSideContainer/HBoxContainer"]
-margin_left = 665.0
-margin_top = 18.0
-margin_right = 685.0
-margin_bottom = 45.0
+margin_left = 674.0
+margin_top = 2.0
+margin_right = 694.0
+margin_bottom = 29.0
 text = "0"
 
 [node name="xLabel" type="Label" parent="Container/RightSideContainer/HBoxContainer"]
-margin_left = 689.0
-margin_top = 18.0
-margin_right = 709.0
-margin_bottom = 45.0
+margin_left = 698.0
+margin_top = 2.0
+margin_right = 718.0
+margin_bottom = 29.0
 text = "x"
 
 [node name="TextureRect" type="TextureRect" parent="Container/RightSideContainer/HBoxContainer"]
-margin_left = 713.0
-margin_right = 777.0
-margin_bottom = 64.0
+self_modulate = Color( 0.670588, 0.670588, 0.670588, 1 )
+margin_left = 722.0
+margin_right = 754.0
+margin_bottom = 32.0
 rect_pivot_offset = Vector2( 32, 32 )
 texture = ExtResource( 4 )
 stretch_mode = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Container/RightSideContainer"]
-margin_top = 68.0
-margin_right = 777.0
-margin_bottom = 86.0
+margin_top = 36.0
+margin_right = 754.0
+margin_bottom = 36.0
 alignment = 2
 
 [node name="LevelLabel" type="Label" parent="Container/RightSideContainer/HBoxContainer2"]
-margin_left = 695.0
-margin_right = 777.0
+visible = false
+margin_left = 672.0
+margin_right = 754.0
 margin_bottom = 18.0
 custom_fonts/font = SubResource( 3 )
 text = "Level 0"
@@ -119,3 +123,33 @@ margin_top = 6.0
 margin_right = 134.0
 margin_bottom = 33.0
 text = "Score: 0"
+
+[node name="CenterContainer2" type="CenterContainer" parent="Container"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -108.0
+margin_right = -486.0
+margin_bottom = 418.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActionBarContainer" type="CenterContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -119.0
+grow_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActionBar" parent="ActionBarContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 59.0
+margin_right = 512.0
+margin_bottom = 59.0
+grow_horizontal = 2

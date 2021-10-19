@@ -37,9 +37,6 @@ func updatePlayerValues(a: PlayerProperties):
 	setHealth(a.currentHealth)
 	setPower(a.currentPower)
 	
-func setLevel(_value):
-	$Container/RightSideContainer/HBoxContainer2/LevelLabel.text = "Level " + str(level)
-	
 func setScore(value):
 	$Container/CenterContainer/scoreLabel.text = "Score: " + str(value)
 
@@ -54,3 +51,7 @@ func toggleEnemiesRemaining():
 
 func newHighscore():
 	$Container/CenterContainer/scoreLabel.self_modulate = "1d9f25"
+
+
+func _on_Player_coinsChanged(value):
+	$Container/RightSideContainer/HBoxContainer/MeteoriteCounter.text = str(value)

@@ -18,21 +18,40 @@ one_shot = true
 one_shot = true
 
 [node name="mobSpawner" parent="Spawners" index="0"]
+mobSceneString = "res://4. Scenes/Characters/Skullship.tscn"
 spawnDoubleChance = 10
 spawnTripleChance = 4
 spawnQuadChance = 2
 levelKillGoal = 0
 
-[node name="asteroidSpawner" parent="Spawners" index="1"]
+[node name="bombSpawner" parent="Spawners" index="1"]
+mobSceneString = "res://4. Scenes/Objects/Bomb.tscn"
+spawnSingleChance = 40
+
+[node name="freezerSpawner" parent="Spawners" index="2"]
+mobSceneString = "res://4. Scenes/Objects/Freezer.tscn"
+spawnSingleChance = 15
+levelKillGoal = 0
+
+[node name="asteroidSpawner" parent="Spawners" index="3"]
+isActive = false
 objectPath = "res://4. Scenes/Objects/Asteroid.tscn"
+spawnTimerWaitTime = 6
+spawnChance = 10
+linearSpeed = 100
 
-[node name="healthSpawner" parent="Spawners" index="2"]
+[node name="healthSpawner" parent="Spawners" index="4"]
 linearSpeed = 350
 
-[node name="shootingSpeedSpawner" parent="Spawners" index="3"]
-linearSpeed = 350
-
+[connection signal="difficultyBump" from="." to="Spawners/asteroidSpawner" method="_on_Level1_difficultyBump"]
+[connection signal="difficultyBump" from="." to="Spawners/mobSpawner" method="_on_Level1_difficultyBump"]
+[connection signal="coinsChanged" from="Player" to="GUI" method="_on_Player_coinsChanged"]
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
 [connection signal="healthChanged" from="Player" to="GUI" method="_on_Player_healthChanged"]
+[connection signal="hullUpgradeDone" from="GUI/ActionBarContainer/ActionBar" to="Player" method="_on_ActionBar_hullUpgradeDone"]
+[connection signal="shotSpeedUpgradeDone" from="GUI/ActionBarContainer/ActionBar" to="Player" method="_on_ActionBar_shotSpeedUpgradeDone"]
+[connection signal="weaponUpgradeDone" from="GUI/ActionBarContainer/ActionBar" to="Player" method="_on_ActionBar_weaponUpgradeDone"]
 [connection signal="timeout" from="Timers/winTimer" to="." method="_on_winTimer_timeout"]
 [connection signal="timeout" from="Timers/loseTimer" to="." method="_on_loseTimer_timeout"]
+
+[editable path="GUI"]

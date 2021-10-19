@@ -24,8 +24,7 @@ export (int, 0.0, 100.0) var badLuckProtection = 0.00
 
 func _ready():
 	if isActive:
-		$spawnTimer.wait_time = spawnTimerWaitTime 
-		$spawnTimer.start()
+		start()
 
 func _on_spawnTimer_timeout():
 	randomize()
@@ -60,3 +59,22 @@ func spawnThing():
 		spawnObject.angular_velocity = angularSpeed
 		
 		add_child(spawnObject)
+
+
+func start():
+	$spawnTimer.wait_time = spawnTimerWaitTime 
+	$spawnTimer.start()
+
+func bumpDiff():
+	if isActive:
+		linearSpeed += 25
+		spawnChance += 5
+		spawnTimerWaitTime = clamp(spawnTimerWaitTime-0.2, 1.4, 10)
+		$spawnTimer.wait_time = spawnTimerWaitTime
+	else:
+		isActive = true
+		start()
+
+
+func _on_Level1_difficultyBump(_score):
+	bumpDiff()

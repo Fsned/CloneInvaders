@@ -88,6 +88,21 @@ autostart = true
 levelKillGoal = 10
 isActive = true
 
+[node name="bombSpawner" parent="Spawners" instance=ExtResource( 7 )]
+spawnSingleChance = 12
+spawnDoubleChance = 0
+spawnTripleChance = 0
+spawnQuadChance = 0
+levelKillGoal = 0
+isActive = true
+
+[node name="freezerSpawner" parent="Spawners" instance=ExtResource( 7 )]
+spawnSingleChance = 25
+spawnDoubleChance = 0
+spawnTripleChance = 0
+spawnQuadChance = 0
+levelKillGoal = 10
+
 [node name="asteroidSpawner" parent="Spawners" instance=ExtResource( 4 )]
 isActive = true
 objectPath = "res://4. Scenes/Obstacles/Asteroid.tscn"
@@ -109,5 +124,7 @@ linearDirection = Vector2( -1, 0 )
 linearSpeed = 500
 angularSpeed = 5
 badLuckProtection = 5
+
+[node name="Scraps" type="Node" parent="."]
 
 [connection signal="timeout" from="Timers/scoreTimer" to="." method="_on_scoreTimer_timeout"]

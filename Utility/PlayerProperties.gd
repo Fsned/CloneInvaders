@@ -6,7 +6,7 @@ class_name PlayerProperties, "res://1. GFX/Spaceships/Player.png"
 var actionBarItems = ["Single Laser"]
 
 ### Currency stuff
-var meteorites = 0
+var coins = 0
 
 ### Stats
 var maxHealth = 100
@@ -53,8 +53,10 @@ func heal(amount):
 		currentHealth = maxHealth
 
 
-
 func setMaxHealth(amount):
 	maxHealth = amount
 	if currentHealth > maxHealth:
 		currentHealth = maxHealth
+		
+func getMaxHealth():
+	return maxHealth

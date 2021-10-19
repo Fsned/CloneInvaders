@@ -2,7 +2,9 @@ extends KinematicBody2D
 
 var properties = PlayerProperties.new()
 
-export(int, "Player", "Enemy", "Boss", "Pickup") var unitType = 0
+#var weapon = Weapon.new()
+
+export(int, "Player", "Enemy", "Boss", "Pickup", "Bomb", "Freezer") var unitType = 0
 enum pickupType {
 	aye,
 	health,
@@ -29,6 +31,8 @@ export (int, "Basic", "Double", "Triple", "Cone") var currentWeapon = weapon.bas
 
 export var SPEED = 10000
 export var invincible = true
+export var canMove = true
+export var frozenTimer = 0
 export (float, 0.1, 5) var shotCooldown = 1
 var motion = Vector2.ZERO
 var projectileSpeed = 20
@@ -36,20 +40,28 @@ var currentProjectile = preload("res://4. Scenes/Objects/LaserBullet.tscn")
 var alive = true
 var health = 50
 var playerColor = "e3e01a"
+export var canCollectCoins = false
 
 signal healthChanged
 #signal powerChanged
 signal died
 signal weaponChanged
+signal coinsChanged
 	
 func _ready():
 	switchWeapon(currentWeapon, true)	
 	
 
 func followMouse():	
-	look_at(get_global_mouse_position())
+	if canMove:
+		look_at(get_global_mouse_position())
 
-func handleEnemyInput():
+func handleEnemyInput(delta = 0):
+	if frozenTimer > 0:
+		frozenTimer -= delta
+		if frozenTimer <= 0:
+			canMove = true
+	
 	if $RayCast2D.is_colliding():
 		fire("c91e1e")
 		
@@ -59,13 +71,21 @@ func handlePlayerInput():
 			fire(playerColor)
 	
 
-func handlePlayerMovement():
+func handlePlayerMovement(delta = 0):
 	if is_alive():
-		var x = Input.get_action_strength("Right") - Input.get_action_strength("Left")
-		var y = Input.get_action_strength("Back") - Input.get_action_strength("Forward")
-		
-		motion.x = x
-		motion.y = y
+		if frozenTimer > 0:
+			frozenTimer -= delta
+			if frozenTimer <= 0:
+				canMove = true
+				frozenTimer = 0
+		if canMove: 
+			var x = Input.get_action_strength("Right") - Input.get_action_strength("Left")
+			var y = Input.get_action_strength("Back") - Input.get_action_strength("Forward")
+			
+			motion.x = x
+			motion.y = y
+		else:
+			motion = Vector2.ZERO
 
 		var _a = move_and_slide(motion * SPEED)
 
@@ -74,20 +94,25 @@ func handlePlayerMovement():
 func switchWeapon(newWeapon, forcedUpdate = false):
 	if (is_alive() && currentWeapon != newWeapon) or forcedUpdate:
 		currentWeapon = newWeapon
-		
-		match currentWeapon:
-			weapon.basic:
-				$shotCooldown.wait_time = weaponCooldowns["basic"]
+#
+#		match currentWeapon:
+#			weapon.basic:
+#				$shotCooldown.wait_time = weaponCooldowns["basic"]
+##				$shotCooldown.wait_time = 0.25 + (unitType*1)
+#			weapon.double:
 #				$shotCooldown.wait_time = 0.25 + (unitType*1)
-			weapon.double:
-				$shotCooldown.wait_time = 0.25 + (unitType*1)
-			weapon.triple:
-				$shotCooldown.wait_time = 0.25 + (unitType*1)
-			weapon.cone:
-				$shotCooldown.wait_time = 0.25 + (unitType*1)
+#			weapon.triple:
+#				$shotCooldown.wait_time = 0.25 + (unitType*1)
+#			weapon.cone:
+#				$shotCooldown.wait_time = 0.25 + (unitType*1)
 				
 		emit_signal("weaponChanged")
 
+func setWeaponCooldown(time):
+	$shotCooldown.wait_time = time
+	
+func getWeaponCooldown():
+	return $shotCooldown.wait_time
 
 func fire(_colour = "e3e01a"):
 	
@@ -175,3 +200,39 @@ func getShootingSpeed():
 	
 func setShootingSpeed(value):
 	$shotCooldown.wait_time = value
+	
+	
+func collectCoin():
+	if canCollectCoins:
+		addCoins(1)
+		return true
+	
+	return false
+	
+func getCoins():
+	return properties.coins
+
+func setCoins(amount):
+	if properties.coins != amount:
+		properties.coins = amount
+		emit_signal("coinsChanged", properties.coins)
+
+func addCoins(amount):
+	properties.coins += amount
+	emit_signal("coinsChanged", properties.coins)
+	
+func deductCoins(amount, lessThanZero = false):
+	var temp = properties.coins
+	
+	if lessThanZero:
+		properties.coins -= amount
+	else:
+		properties.coins = clamp(properties.coins-amount, 0, 999999999)
+	if temp != properties.coins:
+		emit_signal("coinsChanged", properties.coins)
+
+
+func freeze(timeSeconds):
+	print ("Frozen for: " + str(timeSeconds) + " seconds")
+	canMove = false
+	frozenTimer = timeSeconds
