@@ -1,148 +1,70 @@
 extends Node
 
 
-const skullshipScene = preload("res://4. Scenes/Characters/Skullship.tscn")
+@export var mobSceneString: String
+var mobScene: PackedScene
 
-export (String) var mobSceneString
+@export_range(0, 100) var spawnSingleChance = 70
+@export_range(0, 100) var spawnDoubleChance = 15
+@export_range(0, 100) var spawnTripleChance = 10
+@export_range(0, 100) var spawnQuadChance = 5
 
-export (int, 0, 100) var spawnSingleChance = 70
-export (int, 0, 100) var spawnDoubleChance = 15
-export (int, 0, 100) var spawnTripleChance = 10
-export (int, 0, 100) var spawnQuadChance = 5
+# Mobs spawn at a random height in this range, just off the right edge of the screen
+@export var spawnMinY = 80
+@export var spawnMaxY = 1000
+@export var groupSpacing = 50
 
-export (int, -360, 360) var spawnMoveDirection = 0
-
-export var levelKillGoal = 0
+@export var levelKillGoal = 0
 var mobsSpawned = 0
 
-export var isActive = false
+@export var isActive = false
 
 
 func _ready():
-	
-	if isActive && mobSceneString != "":
-		mobSceneString = load(mobSceneString)
-		$spawnTimer.start()
-		get_node("Area2D/spawnedMobDirection").rotation_degrees = spawnMoveDirection
-	
-	
-func _on_spawnTimer_timeout():
-	if isActive:
-		randomize()
-		var spawnRoll = rand_range(1, 100)
-		if levelKillGoal > 0:
-			if spawnRoll <= spawnQuadChance && mobsSpawned + 4 <= levelKillGoal:
-				spawnQuadlet(mobSceneString)
-				mobsSpawned += 4
-				
-			elif spawnRoll <= spawnTripleChance && mobsSpawned + 3 <= levelKillGoal:
-				spawnTriplet(mobSceneString)
-				mobsSpawned += 3
-			elif spawnRoll <= spawnDoubleChance && mobsSpawned + 2 <= levelKillGoal:
-				spawnDoublet(mobSceneString)
-				mobsSpawned += 2
-			elif spawnRoll <= spawnSingleChance && mobsSpawned + 1 <= levelKillGoal:
-				spawnSinglet(mobSceneString)
-				mobsSpawned += 1
-		
-		else:
-			if spawnRoll <= spawnQuadChance:
-				spawnQuadlet(mobSceneString)
-				mobsSpawned += 4
-				
-			elif spawnRoll <= spawnTripleChance:
-				spawnTriplet(mobSceneString)
-				mobsSpawned += 3
-			elif spawnRoll <= spawnDoubleChance:
-				spawnDoublet(mobSceneString)
-				mobsSpawned += 2
-			elif spawnRoll <= spawnSingleChance:
-				spawnSinglet(mobSceneString)
-				mobsSpawned += 1
-			
-			
-	
-	
-func spawnSinglet(mobScene, x = $spawnPoint.position.x, y = rand_range(80, 1000)):
-	var yPlacementDirection = false
-	
-	if y + 0 <= 550:
-		yPlacementDirection = true
-	
-	for a in range(1):
-		var mob = mobScene.instance()
-		mob.set_as_toplevel(true)
-		mob.global_transform = $spawnPoint.global_transform
-		mob.position.x = x
-		mob.rotation_degrees = 180
-		
-		if yPlacementDirection:
-			mob.position.y = y + a*50
-		else:
-			mob.position.y = y - a*50
-		add_child(mob)
-	
-func spawnDoublet(mobScene, x = $spawnPoint.position.x, y = rand_range(80, 1000)):
-	var yPlacementDirection = false
-	
-	if y + 50 <= 550:
-		yPlacementDirection = true
-	
-	for a in range(2):
-		var mob = mobScene.instance()
-		mob.set_as_toplevel(true)
-		mob.global_transform = $spawnPoint.global_transform
-		mob.position.x = x
-		mob.rotation_degrees = 180
-		if yPlacementDirection:
-			mob.position.y = y + a*50
-		else:
-			mob.position.y = y - a*50
-		add_child(mob)
-	
-	
-func spawnTriplet(mobScene, x = $spawnPoint.position.x, y = rand_range(80, 1000)):
-	var yPlacementDirection = false
-	
-	if y + 100 <= 550:
-		yPlacementDirection = true
-	
-	for a in range(3):
-		var mob = mobScene.instance()
-		mob.set_as_toplevel(true)
-		mob.global_transform = $spawnPoint.global_transform
-		mob.position.x = x
-		mob.rotation_degrees = 180
-		if yPlacementDirection:
-			mob.position.y = y + a*50
-		else:
-			mob.position.y = y - a*50
-		add_child(mob)
-	
 
-func spawnQuadlet(mobScene, x = $spawnPoint.position.x, y = rand_range(80, 1000)):
-	var yPlacementDirection = false
-	
-	if y + 150 <= 550:
-		yPlacementDirection = true
-	
-	for a in range(4):
-		var mob = mobScene.instance()
-		mob.set_as_toplevel(true)
+	if isActive && mobSceneString != "":
+		mobScene = load(mobSceneString)
+		$spawnTimer.start()
+
+
+func _on_spawnTimer_timeout():
+	if not isActive or mobScene == null:
+		return
+
+	var spawnRoll = randi_range(1, 100)
+	var groupSize = 0
+
+	if spawnRoll <= spawnQuadChance: groupSize = 4
+	elif spawnRoll <= spawnTripleChance: groupSize = 3
+	elif spawnRoll <= spawnDoubleChance: groupSize = 2
+	elif spawnRoll <= spawnSingleChance: groupSize = 1
+
+	if levelKillGoal > 0:
+		groupSize = min(groupSize, levelKillGoal - mobsSpawned)
+
+	if groupSize > 0:
+		spawnGroup(groupSize)
+		mobsSpawned += groupSize
+
+
+# Spawns a vertical line of mobs. Lines grow down from the top half of the
+# screen and up from the bottom half, so they stay inside the spawn area.
+func spawnGroup(count, x = $spawnPoint.position.x, y = randf_range(spawnMinY, spawnMaxY)):
+	var direction = 1 if y <= (spawnMinY + spawnMaxY) / 2.0 else -1
+
+	for a in range(count):
+		var mob = mobScene.instantiate()
+		mob.set_as_top_level(true)
 		mob.global_transform = $spawnPoint.global_transform
 		mob.position.x = x
+		mob.position.y = y + a * groupSpacing * direction
 		mob.rotation_degrees = 180
-		if yPlacementDirection:
-			mob.position.y = y + a*50
-		else:
-			mob.position.y = y - a*50
 		add_child(mob)
 
 
 func diffBump(_score):
-	randomize()
-	var randomNumber = rand_range(1, 5)
-	match(randomNumber):
+	# randi_range gives whole numbers - the old rand_range gave floats, so this never matched
+	match randi_range(1, 5):
 		1:
 			spawnSingleChance += 5
 		2:
@@ -153,16 +75,7 @@ func diffBump(_score):
 			spawnQuadChance += 1
 		5:
 			pass
-			
-	
-	
-	
-	
-	
 
 
 func _on_Level1_difficultyBump(score):
 	diffBump(score)
-	
-	
-

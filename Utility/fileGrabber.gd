@@ -15,23 +15,22 @@ extends Node
 
 
 func fileGrab(path, matchCase, xFix):
-	
-	var dir = Directory.new()
-	dir.open(path)
-	dir.list_dir_begin(true)
-	
-	var fileName = dir.get_next()
 	var fileList = []
-	while (fileName != ""):
+
+	for rawName in DirAccess.get_files_at(path):
+		# In exported builds files show up as "x.png.import" / "x.tscn.remap",
+		# but load() still works with the original name.
+		var fileName = rawName.trim_suffix(".import").trim_suffix(".remap")
+		if fileList.has(path + fileName):
+			continue
+
 		match matchCase:
 			0:
 				if (fileName.begins_with(xFix)):
 					fileList.append(path + fileName)
-				
+
 			1:
 				if (fileName.ends_with(xFix)):
 					fileList.append(path + fileName)
-				
-		fileName = dir.get_next()
-		
+
 	return fileList

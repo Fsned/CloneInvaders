@@ -1,8 +1,8 @@
 extends Control
 
-export(String, MULTILINE) var message = ""
-export var hasButton = false
-export var displaySpaceTip = true
+@export var message = "" # (String, MULTILINE)
+@export var hasButton = false
+@export var displaySpaceTip = true
 
 var series = ""
 

@@ -4,9 +4,9 @@ var rotationScale = 0.0
 
 const asteroidFragment = preload("res://4. Scenes/Objects/asteroidFragment.tscn")
 
-export var damage = 50
-export var shatterChance = 100
-export var fragmentSpeed = 350
+@export var damage = 50
+@export var shatterChance = 100
+@export var fragmentSpeed = 350
 
 func ready():
 	randomize()
@@ -46,9 +46,9 @@ func explode():
 	$AnimationPlayer.play("explode")
 	
 	for _a in range(noOfFragments):
-		var shatterFragmentObject = asteroidFragment.instance()
+		var shatterFragmentObject = asteroidFragment.instantiate()
 		shatterFragmentObject.global_transform = global_transform
-		shatterFragmentObject.linear_velocity = Vector2.LEFT.rotated(rad2deg(randi() % 6)) * fragmentSpeed
+		shatterFragmentObject.linear_velocity = Vector2.LEFT.rotated(randf() * TAU) * fragmentSpeed
 		get_parent().add_child(shatterFragmentObject)
 	
 	collision_layer = 0

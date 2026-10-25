@@ -5,11 +5,11 @@ var actionbarItemCount = 0
 
 var currentItemInFocus = 0
 
-export var level = ""
+@export var level = ""
 
 func _ready():
 	processActionBar()
-	$Container/CenterContainer/scoreLabel.self_modulate = "ffffff"
+	$Container/CenterContainer/scoreLabel.self_modulate = Color("ffffff")
 	
 	
 func processActionBar():
@@ -50,7 +50,7 @@ func toggleEnemiesRemaining():
 
 
 func newHighscore():
-	$Container/CenterContainer/scoreLabel.self_modulate = "1d9f25"
+	$Container/CenterContainer/scoreLabel.self_modulate = Color("1d9f25")
 
 
 func _on_Player_coinsChanged(value):

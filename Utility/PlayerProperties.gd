@@ -1,6 +1,7 @@
-extends Node2D
-
-class_name PlayerProperties, "res://1. GFX/Spaceships/Player.png"
+@icon("res://1. GFX/Spaceships/Player.png")
+# Plain data object (never added to the scene tree), so RefCounted rather than a Node
+extends RefCounted
+class_name PlayerProperties
 
 ### Actionbar stuff
 var actionBarItems = ["Single Laser"]
@@ -23,15 +24,6 @@ const initialExpGoal = 100
 var currentExp = 0
 var expGoal = initialExpGoal
 var expLevelUpMultiplier = 1.2
-
-
-
-func _ready():
-	pass
-	
-func _process(_delta):
-	pass
-
 
 
 

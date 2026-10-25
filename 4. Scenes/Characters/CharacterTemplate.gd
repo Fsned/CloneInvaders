@@ -1,10 +1,16 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var properties = PlayerProperties.new()
 
+# Physics layer bits (see Project Settings > Layer Names > 2D Physics)
+const LAYER_PLAYER = 1
+const LAYER_ENEMY = 2
+const LAYER_SCENERY = 4
+const LAYER_PROJECTILES = 8
+
 #var weapon = Weapon.new()
 
-export(int, "Player", "Enemy", "Boss", "Pickup", "Bomb", "Freezer") var unitType = 0
+@export var unitType = 0 # (int, "Player", "Enemy", "Boss", "Pickup", "Bomb", "Freezer")
 enum pickupType {
 	aye,
 	health,
@@ -27,20 +33,21 @@ var weaponCooldowns = {	"basic": 1,
 						"triple": 0.25,
 						"cone": 0.25 }
 
-export (int, "Basic", "Double", "Triple", "Cone") var currentWeapon = weapon.basic
+@export var currentWeapon = weapon.basic # (int, "Basic", "Double", "Triple", "Cone")
 
-export var SPEED = 10000
-export var invincible = true
-export var canMove = true
-export var frozenTimer = 0
-export (float, 0.1, 5) var shotCooldown = 1
+@export var SPEED = 10000
+@export var invincible = true
+@export var canMove = true
+@export var frozenTimer = 0
+@export var shotCooldown = 1 # (float, 0.1, 5)
 var motion = Vector2.ZERO
 var projectileSpeed = 20
+var projectileDamage = 25
 var currentProjectile = preload("res://4. Scenes/Objects/LaserBullet.tscn")	
 var alive = true
 var health = 50
 var playerColor = "e3e01a"
-export var canCollectCoins = false
+@export var canCollectCoins = false
 
 signal healthChanged
 #signal powerChanged
@@ -49,7 +56,9 @@ signal weaponChanged
 signal coinsChanged
 	
 func _ready():
-	switchWeapon(currentWeapon, true)	
+	# Top-down game: no floors/walls, so use floating motion instead of platformer-style "grounded"
+	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+	switchWeapon(currentWeapon, true)
 	
 
 func followMouse():	
@@ -87,7 +96,9 @@ func handlePlayerMovement(delta = 0):
 		else:
 			motion = Vector2.ZERO
 
-		var _a = move_and_slide(motion * SPEED)
+		set_velocity(motion * SPEED)
+		move_and_slide()
+		var _a = velocity
 
 
 
@@ -114,30 +125,23 @@ func setWeaponCooldown(time):
 func getWeaponCooldown():
 	return $shotCooldown.wait_time
 
-func fire(_colour = "e3e01a"):
-	
+func fire(colour = "e3e01a"):
+	if not $shotCooldown.is_stopped():
+		return
+
 	match currentWeapon:
 		weapon.basic:
-			if $shotCooldown.is_stopped():
-				spawnProjectile(projectileSpeed)
-				$shotCooldown.start()
-				
+			spawnProjectile(projectileSpeed, 0.0, "", colour)
 		weapon.double:
-			if $shotCooldown.is_stopped():
-				for a in range(0, 2):
-					spawnProjectile(projectileSpeed, -0.15 + (a*0.3))
-				$shotCooldown.start()
+			for a in range(0, 2):
+				spawnProjectile(projectileSpeed, -0.08 + (a*0.16), "", colour)
 		weapon.triple:
-			
-			if $shotCooldown.is_stopped():
-				for a in range(0, 3):
-					spawnProjectile(projectileSpeed, -0.15 + (a*0.15))
-				$shotCooldown.start()
+			for a in range(0, 3):
+				spawnProjectile(projectileSpeed, -0.15 + (a*0.15), "", colour)
 		weapon.cone:
-			if $shotCooldown.is_stopped():
-				for a in range(0, 8):
-					spawnProjectile(projectileSpeed, -0.8 + (a*(1.6/8.0)))
-				$shotCooldown.start()
+			for a in range(0, 5):
+				spawnProjectile(projectileSpeed, -0.4 + (a*0.2), "", colour)
+	$shotCooldown.start()
 	
 func is_alive():
 	return alive
@@ -169,12 +173,15 @@ func hurt(amount):
 	
 
 
-func spawnProjectile(speed, rotation = 0, _scenePath = "res://4. Scenes/Projectiles/LaserBullet.tscn", color = "e3e01a"):
-	var projectile = currentProjectile.instance()
-	projectile.set_as_toplevel(true)
+func spawnProjectile(speed, angleOffset = 0.0, _scenePath = "res://4. Scenes/Projectiles/LaserBullet.tscn", color = "e3e01a"):
+	var projectile = currentProjectile.instantiate()
+	projectile.set_as_top_level(true)
 	projectile.global_transform = $Forward.global_transform
-	projectile.linear_velocity = ((Vector2($Forward.global_position - global_position)) * speed).rotated(rotation)
-	projectile.set_projectile_modulation(color)
+	projectile.linear_velocity = ((Vector2($Forward.global_position - global_position)) * speed).rotated(angleOffset)
+	projectile.set_projectile_modulation(Color(color))
+	projectile.damage = projectileDamage
+	# Bullets only hit the other side (+ scenery): player shots hit enemies, enemy shots hit the player
+	projectile.collision_mask = (LAYER_ENEMY if unitType == 0 else LAYER_PLAYER) | LAYER_SCENERY
 	add_child(projectile)
 
 

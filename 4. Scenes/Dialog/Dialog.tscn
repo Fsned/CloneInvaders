@@ -3,7 +3,7 @@
 [ext_resource path="res://4. Scenes/Dialog/Dialog.gd" type="Script" id=2]
 
 [node name="Dialog" type="Node"]
-pause_mode = 2
+process_mode = 3
 script = ExtResource( 2 )
 
 [node name="InitiationTimer" type="Timer" parent="."]

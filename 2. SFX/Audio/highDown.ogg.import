@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/highDown.ogg-a39451ab0683e26d249e277a07134fc8.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cc578rr2y5sba"
+path="res://.godot/imported/highDown.ogg-a39451ab0683e26d249e277a07134fc8.oggvorbisstr"
 
 [deps]
 
 source_file="res://2. SFX/Audio/highDown.ogg"
-dest_files=[ "res://.import/highDown.ogg-a39451ab0683e26d249e277a07134fc8.oggstr" ]
+dest_files=["res://.godot/imported/highDown.ogg-a39451ab0683e26d249e277a07134fc8.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

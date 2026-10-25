@@ -3,12 +3,15 @@ extends "res://4. Scenes/Characters/CharacterTemplate.gd"
 var speed = 0
 
 func _ready():
+	super()
 	properties.setMaxHealth(25)
-	speed = rand_range(-10000, -15000)
+	speed = randf_range(-10000, -15000)
 	
 	
 func _process(delta):
-	var _a = move_and_slide(Vector2(speed * delta, 0))
+	set_velocity(Vector2(speed * delta, 0))
+	move_and_slide()
+	var _a = velocity
 	
 	
 func _on_Area2D_body_entered(body):

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/phaseJump1.ogg-3e53d3bda2f694a1b316d0e4fcc0ba23.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c85fn4gd2onru"
+path="res://.godot/imported/phaseJump1.ogg-3e53d3bda2f694a1b316d0e4fcc0ba23.oggvorbisstr"
 
 [deps]
 
 source_file="res://2. SFX/Audio/phaseJump1.ogg"
-dest_files=[ "res://.import/phaseJump1.ogg-3e53d3bda2f694a1b316d0e4fcc0ba23.oggstr" ]
+dest_files=["res://.godot/imported/phaseJump1.ogg-3e53d3bda2f694a1b316d0e4fcc0ba23.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

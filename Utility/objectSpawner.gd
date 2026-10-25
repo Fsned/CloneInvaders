@@ -1,26 +1,26 @@
 extends Node
 
-export var isActive = false
-export (String, MULTILINE) var objectPath = ""
+@export var isActive = false
+@export var objectPath = "" # (String, MULTILINE)
 
-export (int, 0.1, 100.0) var spawnTimerWaitTime = 3.0
-export (int, 0, 100) var spawnChance = 100
+@export var spawnTimerWaitTime = 3.0 # (int, 0.1, 100.0)
+@export var spawnChance = 100 # (int, 0, 100)
 
-export (Vector2) var spawnPosition = Vector2.ZERO
-export var xSpread = 0
-export var ySpread = 0
+@export var spawnPosition: Vector2 = Vector2.ZERO
+@export var xSpread = 0
+@export var ySpread = 0
 
-export var linearDirection = Vector2(0,0)
-export var linearSpeed = 20
-export var linearRotation = 0
+@export var linearDirection = Vector2(0,0)
+@export var linearSpeed = 20
+@export var linearRotation = 0
 
-export var angularSpeed = 0
+@export var angularSpeed = 0
 
 var originalSpawnChance = spawnChance
 
 var object
 
-export (int, 0.0, 100.0) var badLuckProtection = 0.00
+@export var badLuckProtection = 0.00 # (int, 0.0, 100.0)
 
 func _ready():
 	if isActive:
@@ -43,7 +43,7 @@ func _on_spawnTimer_timeout():
 	
 func spawnThing():
 	if objectPath != "":
-		var spawnObject = load(objectPath).instance()
+		var spawnObject = load(objectPath).instantiate()
 		var randomSpreadX = 0
 		var randomSpreadY = 0
 		

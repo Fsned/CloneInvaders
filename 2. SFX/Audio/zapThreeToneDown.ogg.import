@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/zapThreeToneDown.ogg-364c584ffb05c69f87e3571b08fd2f1b.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://55wdxq4flejh"
+path="res://.godot/imported/zapThreeToneDown.ogg-364c584ffb05c69f87e3571b08fd2f1b.oggvorbisstr"
 
 [deps]
 
 source_file="res://2. SFX/Audio/zapThreeToneDown.ogg"
-dest_files=[ "res://.import/zapThreeToneDown.ogg-364c584ffb05c69f87e3571b08fd2f1b.oggstr" ]
+dest_files=["res://.godot/imported/zapThreeToneDown.ogg-364c584ffb05c69f87e3571b08fd2f1b.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

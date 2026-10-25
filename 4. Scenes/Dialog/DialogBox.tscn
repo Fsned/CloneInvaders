@@ -1,21 +1,22 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://4. Scenes/Dialog/DialogBox.gd" type="Script" id=1]
-[ext_resource path="res://1. GFX/Fonts/Kenney Future.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://1. GFX/Fonts/Kenney Future.ttf" type="FontFile" id=2]
 [ext_resource path="res://4. Scenes/Menus/theme.tres" type="Theme" id=3]
-[ext_resource path="res://1. GFX/GUI/TalkBoxBlack.png" type="Texture" id=4]
+[ext_resource path="res://1. GFX/GUI/TalkBoxBlack.png" type="Texture2D" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 font_data = ExtResource( 2 )
 
-[node name="Dialog" type="Popup" groups=[
+[node name="Dialog" type="Control" groups=[
 "dialogs",
 ]]
-pause_mode = 2
+visible = false
+process_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -33,10 +34,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="CenterContainer"]
-margin_left = 512.0
-margin_top = 287.0
-margin_right = 512.0
-margin_bottom = 313.0
+offset_left = 512.0
+offset_top = 287.0
+offset_right = 512.0
+offset_bottom = 313.0
 align = 1
 valign = 1
 __meta__ = {
@@ -47,11 +48,11 @@ __meta__ = {
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -10.0
-margin_top = -10.1984
-margin_right = 10.0
-margin_bottom = 9.80157
-rect_min_size = Vector2( 300, 0 )
+offset_left = -10.0
+offset_top = -10.1984
+offset_right = 10.0
+offset_bottom = 9.80157
+custom_minimum_size = Vector2( 300, 0 )
 texture = ExtResource( 4 )
 patch_margin_left = 15
 patch_margin_top = 15
@@ -65,9 +66,9 @@ __meta__ = {
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -18.0
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
+offset_top = -18.0
+theme_override_styles/normal = SubResource( 1 )
+theme_override_fonts/font = SubResource( 2 )
 text = "Press space to continue"
 align = 1
 __meta__ = {

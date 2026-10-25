@@ -1,0 +1,8 @@
+# Godot 4 editor/import cache (regenerated automatically)
+.godot/
+
+# Old Godot 3 import cache, no longer used after the Godot 4 port
+.import/
+
+# Temporary dev/test tools
+_devcheck/

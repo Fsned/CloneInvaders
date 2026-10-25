@@ -15,7 +15,7 @@ func _ready():
 	
 func _on_NewGameButton_pressed():
 	print ("New game")
-	var _a = get_tree().change_scene("res://3. Levels/Level1.tscn")
+	var _a = get_tree().change_scene_to_file("res://3. Levels/Level1.tscn")
 	
 
 
@@ -31,7 +31,7 @@ func _on_LoadGameButton_pressed():
 
 func _on_PlayTutorialButton_pressed():
 	print ("Play tutorial")
-	var _a = get_tree().change_scene("res://3. Levels/LevelTutorial.tscn")
+	var _a = get_tree().change_scene_to_file("res://3. Levels/LevelTutorial.tscn")
 
 
 func _on_SettingButton_pressed():
@@ -53,5 +53,3 @@ func _on_SettingButton_pressed():
 	
 	
 	
-
-

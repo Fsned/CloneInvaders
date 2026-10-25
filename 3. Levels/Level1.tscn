@@ -24,26 +24,26 @@ visible = false
 level = "0"
 
 [node name="HBoxContainer" parent="GUI/Container/RightSideContainer" index="0"]
-margin_right = 791.0
+offset_right = 791.0
 
 [node name="MeteoriteCounter" parent="GUI/Container/RightSideContainer/HBoxContainer" index="0"]
-margin_left = 711.0
-margin_right = 731.0
+offset_left = 711.0
+offset_right = 731.0
 
 [node name="xLabel" parent="GUI/Container/RightSideContainer/HBoxContainer" index="1"]
-margin_left = 735.0
-margin_right = 755.0
+offset_left = 735.0
+offset_right = 755.0
 
 [node name="TextureRect" parent="GUI/Container/RightSideContainer/HBoxContainer" index="2"]
-margin_left = 759.0
-margin_right = 791.0
+offset_left = 759.0
+offset_right = 791.0
 
 [node name="HBoxContainer2" parent="GUI/Container/RightSideContainer" index="1"]
-margin_right = 791.0
+offset_right = 791.0
 
 [node name="ActionBar" parent="GUI/ActionBarContainer" index="0"]
-margin_left = 540.0
-margin_right = 540.0
+offset_left = 540.0
+offset_right = 540.0
 
 [node name="winTimer" type="Timer" parent="Timers" index="0"]
 one_shot = true

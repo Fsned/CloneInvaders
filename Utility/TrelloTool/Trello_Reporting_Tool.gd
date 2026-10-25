@@ -34,17 +34,17 @@ var trello_labels = {
 	}
 }
 
-onready var timer = $TimeoutTimer
-onready var http = HTTPClient.new()
-onready var short_text = $Content/Form/ShortDescEdit
-onready var long_text = $Content/Form/LongDescEdit
-onready var send_button = $Content/Form/Custom/Send
-onready var feedback = $Content/Feedback/feedback_label
-onready var close_button = $Content/Feedback/close_button
+@onready var timer = $TimeoutTimer
+@onready var http = HTTPClient.new()
+@onready var short_text = $Content/Form/ShortDescEdit
+@onready var long_text = $Content/Form/LongDescEdit
+@onready var send_button = $Content/Form/Custom/Send
+@onready var feedback = $Content/Feedback/feedback_label
+@onready var close_button = $Content/Feedback/close_button
 
 func _ready():
 	timer.set_wait_time(0.2)
-	if !trello_labels.empty():
+	if !trello_labels.is_empty():
 		for i in range(trello_labels.size()):
 			$Content/Form/Custom/Type.add_item(trello_labels[i].label_description, i)
 		$Content/Form/Custom/Type.selected = 0
@@ -73,7 +73,7 @@ class Attachment:
 	class Struct:
 		var filename: String
 		var mimetype: String
-		var data: PoolByteArray
+		var data: PackedByteArray
 
 	static func from_path(path: String) -> Attachment.Struct:
 		var obj = Attachment.Struct.new()
@@ -89,11 +89,9 @@ class Attachment:
 			_:
 				obj.mimetype = 'application/octet-stream'
 
-		var file = File.new()
-		if file.open(path, File.READ) != OK:
+		if not FileAccess.file_exists(path):
 			return null
-		obj.data = file.get_buffer(file.get_len())
-		file.close()
+		obj.data = FileAccess.get_file_as_bytes(path)
 
 		return obj
 
@@ -104,7 +102,7 @@ class Attachment:
 		obj.data = img.save_png_to_buffer()
 		return obj
 
-func create_post_data(key: String, value) -> PoolByteArray:
+func create_post_data(key: String, value) -> PackedByteArray:
 #	var body: PoolByteArray 
 #	var extra: String = ''
 #	var bytes: PoolByteArray
@@ -125,7 +123,7 @@ func create_post_data(key: String, value) -> PoolByteArray:
 #	var buf = 'Content-Disposition: form-data; name="' + key + '"' + extra
 #	body += ('--' + POST_BOUNDARY + '\r\n' + buf + '\r\n\r\n').to_ascii()
 #	body += bytes + '\r\n'.to_ascii()
-	return PoolByteArray(["",""])
+	return PackedByteArray(["",""])
 
 func send_post(httpc: HTTPClient, path: String, _data: Dictionary) -> int:
 	var headers = [
@@ -137,7 +135,7 @@ func send_post(httpc: HTTPClient, path: String, _data: Dictionary) -> int:
 #		body += create_post_data(key, data[key])
 #	body += ('--' + POST_BOUNDARY + '--\r\n').to_ascii()
 
-	return httpc.request_raw(HTTPClient.METHOD_POST, path, headers, PoolByteArray(["",""]))
+	return httpc.request_raw(HTTPClient.METHOD_POST, path, headers, PackedByteArray(["",""]))
 
 func parse_url(url: String) -> Dictionary:
 	var regex = RegEx.new()
@@ -170,7 +168,7 @@ func create_card():
 		'desc': (long_text.text + "\n\n**Operating System:** " + OS.get_name()),
 	}
 
-	if !trello_labels.empty():
+	if !trello_labels.is_empty():
 		var type = $Content/Form/Custom/Type.selected
 		data['label_id'] = trello_labels[type].label_trello_id
 
@@ -183,15 +181,15 @@ func create_card():
 	data['cover'] = Attachment.from_path("res://icon.png")
 	data['attachments'] = [
 		Attachment.from_image(
-			OpenSimplexNoise.new().get_image(200, 200), 'noise1'
+			FastNoiseLite.new().get_image(200, 200), 'noise1'
 		),
 		Attachment.from_image(
-			OpenSimplexNoise.new().get_image(200, 200), 'noise2'
+			FastNoiseLite.new().get_image(200, 200), 'noise2'
 		),
 	]
 
 	var parsed_url = parse_url(PROXY_URL)
-	if parsed_url.empty():
+	if parsed_url.is_empty():
 		change_feedback("Wrong proxy URL provided, can't send data :-(")
 		return
 
@@ -208,7 +206,7 @@ func create_card():
 		HTTPClient.STATUS_RESOLVING
 	]:
 		http.poll()
-		yield(timer, 'timeout')
+		await timer.timeout
 		timeout -= timer.get_wait_time()
 		if timeout < 0.0:
 			change_feedback("Timeout while waiting to connect to server :-(")
@@ -228,7 +226,7 @@ func create_card():
 	timer.start()
 	while http.get_status() == HTTPClient.STATUS_REQUESTING:
 		http.poll()
-		yield(timer, 'timeout')
+		await timer.timeout
 		timeout -= timer.get_wait_time()
 		if timeout < 0.0:
 			change_feedback("Timeout waiting for server acknowledgement :-(")
@@ -246,12 +244,12 @@ func create_card():
 	if http.has_response() && http.get_response_code() != 200:
 		timeout = 30.0
 		timer.start()
-		var response: PoolByteArray = PoolByteArray(["",""])
+		var response: PackedByteArray = PackedByteArray(["",""])
 		while http.get_status() == HTTPClient.STATUS_BODY:
 			http.poll()
 			var chunk = http.read_response_body_chunk()
 			if chunk.size() == 0:
-				yield(timer, 'timeout')
+				await timer.timeout
 				timeout -= timer.get_wait_time()
 				if timeout < 0.0:
 					change_feedback("Timeout waiting for server response :-(")

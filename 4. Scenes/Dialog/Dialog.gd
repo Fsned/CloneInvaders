@@ -5,18 +5,18 @@ const dialogPath = "res://6. GUI/DialogBox.tscn"
 var numberOfDialogBoxes = 0
 var children
 var currentDialog = 0
-export var timerInitiation = true
-export var initiationTimerValue = 5
+@export var timerInitiation = true
+@export var initiationTimerValue = 5
 
 
-export (PoolStringArray) var dialogs
+@export var dialogs: PackedStringArray
 
 
 func _ready():
 	numberOfDialogBoxes = dialogs.size()
 	
 	for a in range(numberOfDialogBoxes):
-		var child = load(dialogPath).instance()
+		var child = load(dialogPath).instantiate()
 		add_child(child)
 		print ("Setting child text to dialogs[" + str(a) + "]")
 		child.setText(dialogs[a])

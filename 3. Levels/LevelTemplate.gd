@@ -1,6 +1,6 @@
 extends Node2D
 
-export var level = "0"
+@export var level = "0"
 
 var score = 0
 var currentHighscore = 0

@@ -38,7 +38,8 @@ z_as_relative = false
 [node name="LeftBorder" type="StaticBody2D" parent="worldBorders"]
 position = Vector2( 0, 1206.53 )
 scale = Vector2( 1, 4.39704 )
-collision_layer = 0
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/LeftBorder"]
 scale = Vector2( 1, 0.897959 )
@@ -47,7 +48,8 @@ shape = SubResource( 1 )
 [node name="TopBorder" type="StaticBody2D" parent="worldBorders"]
 position = Vector2( 530.419, 0 )
 scale = Vector2( 0.551403, 0.904654 )
-collision_layer = 0
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/TopBorder"]
 scale = Vector2( 1.88, 1 )
@@ -56,7 +58,8 @@ shape = SubResource( 2 )
 [node name="RightBorder" type="StaticBody2D" parent="worldBorders"]
 position = Vector2( 1073.8, 1205.12 )
 scale = Vector2( 1.08163, 2.2 )
-collision_layer = 0
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/RightBorder"]
 scale = Vector2( 1, 1.76 )
@@ -65,7 +68,8 @@ shape = SubResource( 3 )
 [node name="BottomBorder" type="StaticBody2D" parent="worldBorders"]
 position = Vector2( 535.528, 2283.72 )
 scale = Vector2( 0.64, 1 )
-collision_layer = 0
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/BottomBorder"]
 rotation = -3.14159

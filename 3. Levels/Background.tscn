@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://1. GFX/Planets/Lava.png" type="Texture" id=1]
-[ext_resource path="res://1. GFX/Kenney/PNG/Retina/star_small.png" type="Texture" id=2]
+[ext_resource path="res://1. GFX/Planets/Lava.png" type="Texture2D" id=1]
+[ext_resource path="res://1. GFX/Kenney/PNG/Retina/star_small.png" type="Texture2D" id=2]
 [ext_resource path="res://3. Levels/Background.gd" type="Script" id=3]
-[ext_resource path="res://1. GFX/Planets/Baren.png" type="Texture" id=4]
-[ext_resource path="res://1. GFX/Planets/Terran.png" type="Texture" id=5]
-[ext_resource path="res://1. GFX/Planets/Ice.png" type="Texture" id=6]
+[ext_resource path="res://1. GFX/Planets/Baren.png" type="Texture2D" id=4]
+[ext_resource path="res://1. GFX/Planets/Terran.png" type="Texture2D" id=5]
+[ext_resource path="res://1. GFX/Planets/Ice.png" type="Texture2D" id=6]
 
 [sub_resource type="AnimatedTexture" id=1]
 frames = 4
@@ -19,7 +19,7 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticleProcessMaterial" id=3]
 next_pass = SubResource( 2 )
 emission_shape = 2
 emission_box_extents = Vector3( 1, 500, 1 )
@@ -88,7 +88,7 @@ scale_amount_random = 0.5
 [node name="planetTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2( 2449.48, 538.207 )
 amount = 1
 lifetime = 2.0

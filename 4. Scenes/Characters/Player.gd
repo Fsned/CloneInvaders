@@ -10,6 +10,7 @@ var currentWeaponLevel = 0
 #var properties = PlayerProperties.new()
 
 func _ready():
+	super()
 	get_tree().call_group("GUI", "updatePlayerValues", properties)
 	
 
@@ -71,14 +72,14 @@ func upgradeSprite(hullLevel):
 	match(hullLevel):
 		
 		2:
-			$Sprite.texture = load("res://1. GFX/Kenney/PNG/Retina/ship_I.png")
-			$Sprite.scale = Vector2(0.5, 0.5)
+			$Sprite2D.texture = load("res://1. GFX/Kenney/PNG/Retina/ship_I.png")
+			$Sprite2D.scale = Vector2(0.5, 0.5)
 		4:
-			$Sprite.texture = load("res://1. GFX/Kenney/PNG/Retina/ship_G.png")
-			$Sprite.scale = Vector2(0.5, 0.5)
+			$Sprite2D.texture = load("res://1. GFX/Kenney/PNG/Retina/ship_G.png")
+			$Sprite2D.scale = Vector2(0.5, 0.5)
 		6:
-			$Sprite.texture = load("res://1. GFX/Kenney/PNG/Retina/ship_L.png")
-			$Sprite.scale = Vector2(0.5, 0.5)
+			$Sprite2D.texture = load("res://1. GFX/Kenney/PNG/Retina/ship_L.png")
+			$Sprite2D.scale = Vector2(0.5, 0.5)
 		_:
 			pass
 	

@@ -1,11 +1,11 @@
-extends Popup
+extends Control
 
 
 	
 	
 func _input(_event):
 	if Input.is_action_just_pressed("Pause"):
-		if get_tree().get_root().find_node("loseMenu", true, false).visible == false:
+		if get_tree().get_root().find_child("loseMenu", true, false).visible == false:
 			togglePauseMenu()
 
 
@@ -41,7 +41,7 @@ func _on_SureNo_pressed():
 
 func _on_MenuButton_pressed():
 	togglePauseMenu()
-	var _a = get_tree().change_scene("res://4. Scenes/Menus/welcomeMenu.tscn")
+	var _a = get_tree().change_scene_to_file("res://4. Scenes/Menus/welcomeMenu.tscn")
 	get_tree().call_group("dialogs", "closeAllDialogs")
 
 

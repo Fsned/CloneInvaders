@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/phaserUp7.ogg-b727d0fd50c2a81fbde8371f51eea436.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ch6d7ktci1xxu"
+path="res://.godot/imported/phaserUp7.ogg-b727d0fd50c2a81fbde8371f51eea436.oggvorbisstr"
 
 [deps]
 
 source_file="res://2. SFX/Audio/phaserUp7.ogg"
-dest_files=[ "res://.import/phaserUp7.ogg-b727d0fd50c2a81fbde8371f51eea436.oggstr" ]
+dest_files=["res://.godot/imported/phaserUp7.ogg-b727d0fd50c2a81fbde8371f51eea436.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

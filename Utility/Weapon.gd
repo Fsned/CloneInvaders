@@ -56,8 +56,8 @@ func fire(_color):
 
 
 func spawnProjectile(speed, rotation = 0, _scenePath = "res://4. Scenes/Projectiles/LaserBullet.tscn", _color = "e3e01a"):
-	var projectile = currentProjectile.instance()
-	projectile.set_as_toplevel(true)
+	var projectile = currentProjectile.instantiate()
+	projectile.set_as_top_level(true)
 	projectile.global_transform = global_transform
 	
 	projectile.linear_velocity = ((Vector2(global_position - global_position)) * speed).rotated(rotation)

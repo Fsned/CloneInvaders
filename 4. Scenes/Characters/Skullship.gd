@@ -5,17 +5,17 @@ var expReward = 50
 var meteoReward = 5
 
 # -- Misc 
-export var frozen = false
+@export var frozen = false
 
 # -- Abilities --
-export var charge = false
-export var shooting = true
+@export var charge = false
+@export var shooting = true
 
 # -- Movement --
-export var followPath = false
-export var moveForward = true
-export var moveForwardSpeed = 10000
-export var lookAtPlayer = true
+@export var followPath = false
+@export var moveForward = true
+@export var moveForwardSpeed = 10000
+@export var lookAtPlayer = true
 
 # -- Charging --
 var charging = false
@@ -31,14 +31,15 @@ var possibleDestinations = []
 var parentNode
 
 
-onready var navigation = get_tree().get_root().find_node("Navigation2D", true, false)
-onready var availableDestinations
+@onready var navigation = get_tree().get_root().find_child("Navigation2D", true, false)
+@onready var availableDestinations
 var path
 var scrapInstance
 
 
 func _ready():
-	parentNode = get_tree().get_root().find_node("Scraps", true, false)
+	super()
+	parentNode = get_tree().get_root().find_child("Scraps", true, false)
 	var scraps = FileGrabber.fileGrab("res://4. Scenes/Objects/scraps/", 1, ".tscn")
 	scrapInstance = load(scraps[randi() % scraps.size()])
 	makePath()
@@ -61,10 +62,16 @@ func handleMoveForward(delta):
 	if canMove:
 		motion = ((global_position + Vector2(-1, 0)) - global_position).normalized() * moveForwardSpeed * delta
 	else:
-		motion = move_and_slide(Vector2.ZERO, Vector2(0, -1))
+		set_velocity(Vector2.ZERO)
+		set_up_direction(Vector2(0, -1))
+		move_and_slide()
+		motion = velocity
 			
 			
-	var _a = move_and_slide(motion, Vector2(0, -1))
+	set_velocity(motion)
+	set_up_direction(Vector2(0, -1))
+	move_and_slide()
+	var _a = velocity
 
 func navigate(delta):
 	if (navigationPaused): return
@@ -77,12 +84,15 @@ func navigate(delta):
 		if possibleDestinations.size() == 1:
 			makePath()
 		else:
-			possibleDestinations.remove(0)
+			possibleDestinations.remove_at(0)
 	
 	
 func move(delta):
 	motion = (possibleDestinations[0].position - position).normalized() * moveForwardSpeed * delta
-	var _a = move_and_slide(motion, Vector2(0, -1))
+	set_velocity(motion)
+	set_up_direction(Vector2(0, -1))
+	move_and_slide()
+	var _a = velocity
 	
 	
 func updatePath():
@@ -90,7 +100,7 @@ func updatePath():
 		if $Timer.is_stopped():
 			$Timer.start()
 	else:
-		path.remove(0)
+		path.remove_at(0)
 	
 func makePath():
 	possibleDestinations = get_node("Destinations").get_children()
@@ -113,7 +123,10 @@ func handleCharge(delta):
 		else:
 			motion = (initialPosition - global_position).normalized() * moveForwardSpeed * 0.5 * delta
 			
-		var _a = move_and_slide(motion, Vector2(0, -1))
+		set_velocity(motion)
+		set_up_direction(Vector2(0, -1))
+		move_and_slide()
+		var _a = velocity
 		
 		if !reachedGoal:
 			if global_position.distance_to(goalPosition) < minimumDistanceToDestination:
@@ -138,7 +151,7 @@ func startCharge():
 	
 func disappear():
 	get_tree().call_group("levelManager", "mobDied", "skeleton")
-	var scrapCopy = scrapInstance.instance()
+	var scrapCopy = scrapInstance.instantiate()
 	scrapCopy.global_transform = global_transform
 	parentNode.add_child(scrapCopy)
 	queue_free()

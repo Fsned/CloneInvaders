@@ -3,7 +3,7 @@ extends Node
 
 var series = {}
 
-signal seriesDialogClosed
+signal seriesFinished
 
 func _ready():
 	add_to_group("dialogs")
@@ -13,7 +13,7 @@ func _ready():
 
 
 func openDialogBox(dialogBoxText, showSpaceTooltip = false, seriesId = ""):
-	var dialogBox = load("res://4. Scenes/Dialog/DialogBox.tscn").instance()
+	var dialogBox = load("res://4. Scenes/Dialog/DialogBox.tscn").instantiate()
 	dialogBox.setText(dialogBoxText)
 	dialogBox.displaySpaceTip = showSpaceTooltip
 	add_child(dialogBox)
@@ -79,7 +79,7 @@ func nextSeriesDialog(seriesId):
 		return true
 	else:
 		series.erase(seriesId)
-		emit_signal("seriesDialogClosed")
+		emit_signal("seriesFinished")
 
 
 
