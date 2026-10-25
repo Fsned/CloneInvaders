@@ -1,128 +1,25 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource path="res://3. Levels/Background.tscn" type="PackedScene" id=1]
-[ext_resource path="res://4. Scenes/Characters/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://3. Levels/LevelTemplate.gd" type="Script" id=3]
-[ext_resource path="res://Utility/objectSpawner.tscn" type="PackedScene" id=4]
-[ext_resource path="res://4. Scenes/Menus/pauseMenu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://6. GUI/GUI.tscn" type="PackedScene" id=6]
-[ext_resource path="res://4. Scenes/Characters/mobSpawner.tscn" type="PackedScene" id=7]
-[ext_resource path="res://4. Scenes/Menus/loseMenu.tscn" type="PackedScene" id=8]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 303.365 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 515.114, 10 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 10, 313.74 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 515.115, 10 )
+[ext_resource type="Script" path="res://3. Levels/LevelTemplate.gd" id="1"]
+[ext_resource type="PackedScene" path="res://3. Levels/Background.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://4. Scenes/Characters/Player.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://6. GUI/GUI.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://4. Scenes/Menus/pauseMenu.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://4. Scenes/Menus/loseMenu.tscn" id="6"]
 
 [node name="LevelTemplate" type="Node2D" groups=["levelManager", "persist"]]
-script = ExtResource( 3 )
+script = ExtResource("1")
 
-[node name="Background" parent="." instance=ExtResource( 1 )]
-layer = -1
+[node name="Background" parent="." instance=ExtResource("2")]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 539.272, 2216.72 )
-rotation = -1.60626
-z_index = 6
-z_as_relative = false
+[node name="Player" parent="." instance=ExtResource("3")]
+position = Vector2(540, 1650)
 
-[node name="worldBorders" type="Node" parent="."]
+[node name="GUI" parent="." instance=ExtResource("4")]
 
-[node name="LeftBorder" type="StaticBody2D" parent="worldBorders"]
-position = Vector2( 0, 1206.53 )
-scale = Vector2( 1, 4.39704 )
-collision_layer = 32
-collision_mask = 0
+[node name="Menus" type="CanvasLayer" parent="."]
+layer = 30
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/LeftBorder"]
-scale = Vector2( 1, 0.897959 )
-shape = SubResource( 1 )
+[node name="pauseMenu" parent="Menus" instance=ExtResource("5")]
 
-[node name="TopBorder" type="StaticBody2D" parent="worldBorders"]
-position = Vector2( 530.419, 0 )
-scale = Vector2( 0.551403, 0.904654 )
-collision_layer = 32
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/TopBorder"]
-scale = Vector2( 1.88, 1 )
-shape = SubResource( 2 )
-
-[node name="RightBorder" type="StaticBody2D" parent="worldBorders"]
-position = Vector2( 1073.8, 1205.12 )
-scale = Vector2( 1.08163, 2.2 )
-collision_layer = 32
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/RightBorder"]
-scale = Vector2( 1, 1.76 )
-shape = SubResource( 3 )
-
-[node name="BottomBorder" type="StaticBody2D" parent="worldBorders"]
-position = Vector2( 535.528, 2283.72 )
-scale = Vector2( 0.64, 1 )
-collision_layer = 32
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorders/BottomBorder"]
-rotation = -3.14159
-scale = Vector2( 1.88, 1 )
-shape = SubResource( 4 )
-
-[node name="pauseMenu" parent="." instance=ExtResource( 5 )]
-
-[node name="GUI" parent="." instance=ExtResource( 6 )]
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="scoreTimer" type="Timer" parent="Timers"]
-autostart = true
-
-[node name="loseMenu" parent="." instance=ExtResource( 8 )]
-
-[node name="Spawners" type="Node" parent="."]
-
-[node name="mobSpawner" parent="Spawners" instance=ExtResource( 7 )]
-levelKillGoal = 10
-isActive = true
-
-[node name="bombSpawner" parent="Spawners" instance=ExtResource( 7 )]
-spawnSingleChance = 12
-spawnDoubleChance = 0
-spawnTripleChance = 0
-spawnQuadChance = 0
-levelKillGoal = 0
-isActive = true
-
-[node name="asteroidSpawner" parent="Spawners" instance=ExtResource( 4 )]
-isActive = true
-objectPath = "res://4. Scenes/Obstacles/Asteroid.tscn"
-spawnChance = 30
-spawnPosition = Vector2( 1930, 540 )
-ySpread = 250
-linearDirection = Vector2( -1, 0 )
-linearSpeed = 500
-angularSpeed = 5
-badLuckProtection = 5
-
-[node name="healthSpawner" parent="Spawners" instance=ExtResource( 4 )]
-isActive = true
-objectPath = "res://4. Scenes/Objects/healthPickup.tscn"
-spawnChance = 30
-spawnPosition = Vector2( 1940, 540 )
-ySpread = 400
-linearDirection = Vector2( -1, 0 )
-linearSpeed = 500
-angularSpeed = 5
-badLuckProtection = 5
-
-[node name="Scraps" type="Node" parent="."]
-
-[connection signal="timeout" from="Timers/scoreTimer" to="." method="_on_scoreTimer_timeout"]
+[node name="loseMenu" parent="Menus" instance=ExtResource("6")]

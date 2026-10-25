@@ -209,4 +209,3 @@ position = Vector2( 35, 0 )
 playback_speed = 2.0
 anims/die = SubResource( 2 )
 
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

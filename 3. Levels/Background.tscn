@@ -1,98 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource path="res://1. GFX/Planets/Lava.png" type="Texture2D" id=1]
-[ext_resource path="res://1. GFX/Kenney/PNG/Retina/star_small.png" type="Texture2D" id=2]
-[ext_resource path="res://3. Levels/Background.gd" type="Script" id=3]
-[ext_resource path="res://1. GFX/Planets/Baren.png" type="Texture2D" id=4]
-[ext_resource path="res://1. GFX/Planets/Terran.png" type="Texture2D" id=5]
-[ext_resource path="res://1. GFX/Planets/Ice.png" type="Texture2D" id=6]
-
-[sub_resource type="AnimatedTexture" id=1]
-frames = 4
-frame_1/delay_sec = 0.0
-frame_2/delay_sec = 0.0
-frame_3/delay_sec = 0.0
-
-[sub_resource type="CanvasItemMaterial" id=2]
-particles_animation = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = true
-
-[sub_resource type="ParticleProcessMaterial" id=3]
-next_pass = SubResource( 2 )
-emission_shape = 2
-emission_box_extents = Vector3( 1, 500, 1 )
-flag_disable_z = true
-direction = Vector3( -1, 0, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 20.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 4.0
-scale_random = 1.0
-anim_offset = 1.0
-anim_offset_random = 1.0
-
-[sub_resource type="AnimatedTexture" id=4]
-flags = 4
-frames = 4
-fps = 0.0
-frame_0/texture = ExtResource( 4 )
-frame_1/texture = ExtResource( 6 )
-frame_1/delay_sec = 0.0
-frame_2/texture = ExtResource( 1 )
-frame_2/delay_sec = 0.0
-frame_3/texture = ExtResource( 5 )
-frame_3/delay_sec = 0.0
+[ext_resource type="Script" path="res://3. Levels/Background.gd" id="1"]
 
 [node name="Background" type="CanvasLayer"]
-script = ExtResource( 3 )
+layer = -1
+script = ExtResource("1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="starParticles" type="CPUParticles2D" parent="."]
-visible = false
-position = Vector2( 2414.07, 540 )
-rotation = 1.57079
-amount = 25
-lifetime = 7.0
-preprocess = 50.0
-randomness = 0.25
-texture = ExtResource( 2 )
-emission_shape = 2
-emission_rect_extents = Vector2( 600, 1 )
-scale_amount = 0.1
-hue_variation = 0.09
-hue_variation_random = 0.5
-
-[node name="planetParticles" type="CPUParticles2D" parent="."]
-visible = false
-position = Vector2( 2450, 540 )
-rotation = 1.57079
-scale = Vector2( 50, 50 )
-amount = 1
-texture = SubResource( 1 )
-emission_shape = 2
-emission_rect_extents = Vector2( 100, 1 )
-scale_amount = 3.0
-scale_amount_random = 0.5
-
-[node name="planetTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2( 2449.48, 538.207 )
-amount = 1
-lifetime = 2.0
-process_material = SubResource( 3 )
-texture = SubResource( 4 )
-
-[connection signal="timeout" from="planetTimer" to="." method="_on_planetTimer_timeout"]
+mouse_filter = 2
+color = Color(0.01, 0.01, 0.04, 1)

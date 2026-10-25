@@ -5,6 +5,9 @@ extends Control
 	
 func _input(_event):
 	if Input.is_action_just_pressed("Pause"):
+		var picker = get_tree().get_first_node_in_group("upgradePicker")
+		if picker and picker.isOpen:
+			return
 		if get_tree().get_root().find_child("loseMenu", true, false).visible == false:
 			togglePauseMenu()
 
