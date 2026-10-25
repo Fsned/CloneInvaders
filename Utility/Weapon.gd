@@ -24,7 +24,7 @@ func _ready():
 func _process(_delta):
 	pass
 
-func switchWeapon(type):
+func switchWeapon(_type):
 	pass
 
 func timerTimeout():
@@ -36,30 +36,26 @@ func fire(_color):
 			if shotCooldown == false:
 				shotCooldown = true
 				spawnProjectile(projectileSpeed)
-				get_tree().create_timer(0.5)
 				
 		weaponType.double:
 			if shotCooldown == false:
 				shotCooldown = true
 				for a in range(0, 2):
 					spawnProjectile(projectileSpeed, -0.15 + (a*0.3))
-				get_tree().create_timer(0.5)
 		weaponType.triple:
 			
 			if shotCooldown == false:
 				shotCooldown = true
 				for a in range(0, 3):
 					spawnProjectile(projectileSpeed, -0.15 + (a*0.15))
-				get_tree().create_timer(0.5)
 		weaponType.cone:
 			if shotCooldown == false:
 				shotCooldown = true
 				for a in range(0, 8):
 					spawnProjectile(projectileSpeed, -0.8 + (a*(1.6/8.0)))
-				get_tree().create_timer(0.5)
 
 
-func spawnProjectile(speed, rotation = 0, _scenePath = "res://4. Scenes/Projectiles/LaserBullet.tscn", color = "e3e01a"):
+func spawnProjectile(speed, rotation = 0, _scenePath = "res://4. Scenes/Projectiles/LaserBullet.tscn", _color = "e3e01a"):
 	var projectile = currentProjectile.instance()
 	projectile.set_as_toplevel(true)
 	projectile.global_transform = global_transform

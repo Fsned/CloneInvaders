@@ -3,8 +3,6 @@ extends RigidBody2D
 
 export var damage = 25
 
-func _ready():
-	$despawnTimer.start()
 
 
 
@@ -27,7 +25,8 @@ func _on_LaserBullet_body_entered(body):
 			
 	$Sprite.visible = false
 	collision_layer = 0
-
+	collision_mask = 0
+	$despawnTimer.start()
 
 func set_projectile_modulation(color):
 	$Sprite.self_modulate = color

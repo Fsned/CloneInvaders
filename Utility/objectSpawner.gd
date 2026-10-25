@@ -67,7 +67,7 @@ func start():
 
 func bumpDiff():
 	if isActive:
-		linearSpeed += 25
+		linearSpeed = clamp(linearSpeed + 10, 20, 125)
 		spawnChance += 5
 		spawnTimerWaitTime = clamp(spawnTimerWaitTime-0.2, 1.4, 10)
 		$spawnTimer.wait_time = spawnTimerWaitTime

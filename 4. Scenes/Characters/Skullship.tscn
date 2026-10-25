@@ -90,6 +90,7 @@ position = Vector2( 45, -0.159 )
 [node name="RayCast2D" parent="." index="6"]
 rotation = -1.57079
 enabled = true
+cast_to = Vector2( 0, 1000 )
 
 [node name="AnimationPlayer" parent="." index="7"]
 anims/die = SubResource( 1 )

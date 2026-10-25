@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://4. Scenes/Characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://4. Scenes/Characters/Player.gd" type="Script" id=2]
@@ -12,58 +12,35 @@
 [ext_resource path="res://1. GFX/Misc/WhiteDot.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=1]
-resource_name = "die"
-step = 0.05
+resource_name = "hover"
+length = 4.0
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ) ]
+"times": PoolRealArray( 0, 1, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -4 ), Vector2( 0, 8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("exhaustFire:visible")
+tracks/1/path = NodePath(".:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.6, 1.2, 1.8, 2.4, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.52549, 0.52549, 0.52549, 1 ), Color( 0.52549, 0.52549, 0.52549, 1 ), Color( 0.52549, 0.52549, 0.52549, 0 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Particles2D:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.05 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"values": [ 95.0, 90.0002, 85.0, 90.0002, 95.0, 90.0002 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -103,81 +80,132 @@ tracks/2/keys = {
 "values": [ Vector2( -17.0521, 0 ), Vector2( -12.2133, 0 ) ]
 }
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.317829, 0.643411, 1 )
 colors = PoolColorArray( 0.76123, 0.76123, 0.76123, 1, 0.756422, 0.776855, 0.179041, 1, 0.679199, 0, 0, 1, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=6]
 _data = [ Vector2( 0, 0.851136 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.323864 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 resource_local_to_scene = true
 emission_shape = 1
 emission_sphere_radius = 5.0
 flag_disable_z = true
-gravity = Vector3( -1000, 0, 0 )
+direction = Vector3( -1, 0, 0 )
+spread = 5.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 830.23
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.4
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 4 )
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
 
-[node name="Player" groups=[
-"player",
-] instance=ExtResource( 1 )]
+[sub_resource type="Animation" id=2]
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/exhaustFire:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.52549, 0.52549, 0.52549, 1 ), Color( 0.52549, 0.52549, 0.52549, 1 ), Color( 0.52549, 0.52549, 0.52549, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/ExhaustParticles:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="Player" groups=["player"] instance=ExtResource( 1 )]
+rotation = -1.57079
 collision_layer = 1
 script = ExtResource( 2 )
-unitType = 0
-currentWeapon = 0
-SPEED = 10000
-invincible = true
-canMove = true
-frozenTimer = 0
-shotCooldown = 1.0
 canCollectCoins = true
 
 [node name="Sprite" parent="." index="0"]
 self_modulate = Color( 0.52549, 0.52549, 0.52549, 1 )
 texture = ExtResource( 3 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" index="0"]
+autoplay = "hover"
+anims/hover = SubResource( 1 )
+
+[node name="exhaustFire" type="Sprite" parent="Sprite" index="1"]
+visible = false
+self_modulate = Color( 0.980392, 0.717647, 0, 1 )
+position = Vector2( -17.0521, 0 )
+rotation = -1.57079
+scale = Vector2( 0.311052, 0.248171 )
+z_index = -1
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite/exhaustFire" index="0"]
+autoplay = "animateExhaust"
+anims/animateExhaust = SubResource( 3 )
+
+[node name="ExhaustParticles" type="Particles2D" parent="Sprite" index="2"]
+show_behind_parent = true
+rotation = -1.5708
+scale = Vector2( 0.1, 0.1 )
+amount = 10
+lifetime = 0.4
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 10 )
+
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( -0.58992, 0.15871 )
+position = Vector2( -7.43021, 0.158725 )
 
 [node name="Forward" parent="." index="4"]
 visible = true
+show_behind_parent = true
 position = Vector2( 35, 0 )
 
 [node name="AnimationPlayer" parent="." index="6"]
 playback_speed = 2.0
-anims/die = SubResource( 1 )
-
-[node name="exhaustFire" type="Sprite" parent="." index="7"]
-visible = false
-self_modulate = Color( 0.873638, 0.494989, 0.195207, 1 )
-position = Vector2( -12.2133, 0 )
-rotation = -4.71238
-scale = Vector2( 0.25, 0.15 )
-z_index = -1
-texture = ExtResource( 4 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="exhaustFire" index="0"]
-autoplay = "animateExhaust"
-anims/animateExhaust = SubResource( 2 )
-
-[node name="Particles2D" type="Particles2D" parent="." index="9"]
-show_behind_parent = true
-position = Vector2( -4.61865, 0 )
-scale = Vector2( 0.2, 0.2 )
-amount = 10
-lifetime = 0.4
-local_coords = false
-process_material = SubResource( 7 )
-texture = ExtResource( 10 )
+anims/die = SubResource( 2 )
 
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

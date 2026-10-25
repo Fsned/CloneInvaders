@@ -58,5 +58,8 @@ func setMaxHealth(amount):
 	if currentHealth > maxHealth:
 		currentHealth = maxHealth
 		
-func getMaxHealth():
+func getMaxHealth() -> int:
 	return maxHealth
+
+func getNormalizedHealth() -> int:
+	return int(float(currentHealth) / float(maxHealth) * 100.0)

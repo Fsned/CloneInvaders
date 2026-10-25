@@ -41,8 +41,8 @@ func setScore(value):
 	$Container/CenterContainer/scoreLabel.text = "Score: " + str(value)
 
 
-func _on_Player_healthChanged(value):
-	setHealth(value)
+func _on_Player_healthChanged(health):
+	setHealth(health)
 
 
 func toggleEnemiesRemaining():

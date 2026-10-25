@@ -150,7 +150,8 @@ func hurt(amount):
 		return false
 	
 	properties.currentHealth -= amount
-	emit_signal("healthChanged", properties.currentHealth)
+	emit_signal("healthChanged", properties.getNormalizedHealth())
+
 	
 	if properties.currentHealth <= 0:
 		if $AnimationPlayer.has_animation("die"):
@@ -181,8 +182,8 @@ func pickup(pickType):
 	match(pickType):
 		pickupType.health:
 			properties.heal(20)
-			print ("picked up health! new health: " + str(properties.currentHealth))
-			emit_signal("healthChanged", properties.currentHealth)
+			print ("picked up health! new health: " + str(properties.currentHealth) + " / " + str(properties.maxHealth))
+			emit_signal("healthChanged", properties.getNormalizedHealth())
 			
 		pickupType.shootingSpeed:
 			var newShotSpeed = getShootingSpeed() * 0.9

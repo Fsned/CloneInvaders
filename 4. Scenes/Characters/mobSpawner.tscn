@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://4. Scenes/Characters/mobSpawner.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 546.299, 10 )
 
 [node name="mobSpawner" type="Node"]
 script = ExtResource( 2 )
@@ -10,6 +13,12 @@ levelKillGoal = 2000
 wait_time = 3.0
 
 [node name="spawnPoint" type="Position2D" parent="."]
-position = Vector2( 1078.78, 289.173 )
+position = Vector2( 1920, 540 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 536.299, 0 )
+shape = SubResource( 1 )
+
+[node name="spawnedMobDirection" type="RayCast2D" parent="CollisionShape2D"]
 
 [connection signal="timeout" from="spawnTimer" to="." method="_on_spawnTimer_timeout"]

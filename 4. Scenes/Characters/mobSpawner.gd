@@ -10,6 +10,8 @@ export (int, 0, 100) var spawnDoubleChance = 15
 export (int, 0, 100) var spawnTripleChance = 10
 export (int, 0, 100) var spawnQuadChance = 5
 
+export (int, -360, 360) var spawnMoveDirection = 0
+
 export var levelKillGoal = 0
 var mobsSpawned = 0
 
@@ -21,6 +23,7 @@ func _ready():
 	if isActive && mobSceneString != "":
 		mobSceneString = load(mobSceneString)
 		$spawnTimer.start()
+		get_node("Area2D/spawnedMobDirection").rotation_degrees = spawnMoveDirection
 	
 	
 func _on_spawnTimer_timeout():
@@ -60,7 +63,7 @@ func _on_spawnTimer_timeout():
 			
 	
 	
-func spawnSinglet(mobScene, x = $spawnPoint.position.x, y = rand_range(50, 550)):
+func spawnSinglet(mobScene, x = $spawnPoint.position.x, y = rand_range(80, 1000)):
 	var yPlacementDirection = false
 	
 	if y + 0 <= 550:
@@ -79,7 +82,7 @@ func spawnSinglet(mobScene, x = $spawnPoint.position.x, y = rand_range(50, 550))
 			mob.position.y = y - a*50
 		add_child(mob)
 	
-func spawnDoublet(mobScene, x = $spawnPoint.position.x, y = clamp(randi() % 600, 50, 550)):
+func spawnDoublet(mobScene, x = $spawnPoint.position.x, y = rand_range(80, 1000)):
 	var yPlacementDirection = false
 	
 	if y + 50 <= 550:
@@ -98,7 +101,7 @@ func spawnDoublet(mobScene, x = $spawnPoint.position.x, y = clamp(randi() % 600,
 		add_child(mob)
 	
 	
-func spawnTriplet(mobScene, x = $spawnPoint.position.x, y = randi() % 600):
+func spawnTriplet(mobScene, x = $spawnPoint.position.x, y = rand_range(80, 1000)):
 	var yPlacementDirection = false
 	
 	if y + 100 <= 550:
@@ -117,7 +120,7 @@ func spawnTriplet(mobScene, x = $spawnPoint.position.x, y = randi() % 600):
 		add_child(mob)
 	
 
-func spawnQuadlet(mobScene, x = $spawnPoint.position.x, y = randi() % 600):
+func spawnQuadlet(mobScene, x = $spawnPoint.position.x, y = rand_range(80, 1000)):
 	var yPlacementDirection = false
 	
 	if y + 150 <= 550:

@@ -99,9 +99,6 @@ func _on_VisibilityNotifier2D_screen_entered():
 	invincible = false
 
 
-
-
-
 func _on_ActionBar_hullUpgradeDone():
 	upgradeHull()
 
